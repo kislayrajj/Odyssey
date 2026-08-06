@@ -7,13 +7,6 @@
         { "fieldPath": "categoryId", "order": "ASCENDING" },
         { "fieldPath": "order", "order": "ASCENDING" }
       ]
-    },
-    {
-      "collectionGroup": "items",
-      "queryScope": "COLLECTION",
-      "fields": [
-        { "fieldPath": "categoryId", "order": "ASCENDING" }
-      ]
     }
   ],
   "fieldOverrides": []
