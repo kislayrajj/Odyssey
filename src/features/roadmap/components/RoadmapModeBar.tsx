@@ -10,24 +10,17 @@ export function RoadmapModeBar() {
         onClick={() => setViewMode('syllabus')}
         className={clsx(
           'mr-6 border-b-2 pb-3 pt-3 font-sans text-[12.5px] font-semibold tracking-wide transition-colors',
-          viewMode === 'syllabus'
-            ? 'border-accent text-text-main'
-            : 'border-transparent text-text-faint hover:text-text-dim'
+          viewMode === 'syllabus' ? 'border-accent text-text-main' : 'border-transparent text-text-faint hover:text-text-dim'
         )}
       >
         Syllabus Roadmap
-        <span className="ml-1.5 font-mono text-[11px] font-normal text-text-faint">
-          start &rarr; end
-        </span>
+        <span className="ml-1.5 font-mono text-[11px] font-normal text-text-faint">start &rarr; end</span>
       </button>
-      
       <button
         onClick={() => setViewMode('company')}
         className={clsx(
           'mr-6 border-b-2 pb-3 pt-3 font-sans text-[12.5px] font-semibold tracking-wide transition-colors',
-          viewMode === 'company'
-            ? 'border-accent text-text-main'
-            : 'border-transparent text-text-faint hover:text-text-dim'
+          viewMode === 'company' ? 'border-accent text-text-main' : 'border-transparent text-text-faint hover:text-text-dim'
         )}
       >
         By Company

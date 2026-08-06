@@ -1,1 +1,1648 @@
-{"category":"database","note":"DB syllabus roadmap for FAANG prep. Practice modules (m04-m13) map every SQL problem to the DBMS concept it drills; theory modules (m01-m03, m14-m20) cover schema design, transactions, indexing, and scaling concepts asked in DB/system-design rounds but have no LeetCode problems attached. Sources merged: the original 8-company scrape (dsa-seed-systemdesign-db-setaside.json, 64 database-sql problems) and the newer 20-company 24 May 2026 scrape (89 problems), with a small set of well-known supplemental problems (flagged individually) added to fill thin modules (CTE/Recursive, Pivoting, Window ties). Company lists are unioned across sources; 'recentCompanies' reflects the most current data available for that problem.","companyDataAsOf":"2026-05-24","companyDataSource":"LeetCode company tags, snapshot 24 May 2026 (github.com/snehasishroy/leetcode-companywise-interview-questions); Database-tag confirmation from github.com/neenza/leetcode-problems and github.com/doocs/leetcode","topics":[{"id":"m01-relational-model-er-design","name":"Relational Model, ER Diagrams & Database Design","order":1,"type":"theory","subtopics":["Entities, Attributes & Relationships","ER Diagrams & Cardinality","Mapping ER to Relational Schema","Schema Design Trade-offs"]},{"id":"m02-keys-constraints-relationships","name":"Keys, Constraints & Relationships","order":2,"type":"theory","subtopics":["Primary Key / Foreign Key / Candidate Key / Super Key","Unique, Not Null & Check Constraints","Referential Integrity","One-to-One, One-to-Many, Many-to-Many"]},{"id":"m03-normalization-denormalization","name":"Normalization & Denormalization","order":3,"type":"theory","subtopics":["Functional Dependencies","1NF, 2NF, 3NF, BCNF","Denormalization Trade-offs","When to Normalize vs Denormalize"]},{"id":"m04-sql-fundamentals","name":"SQL Fundamentals","order":4,"type":"practice","subtopics":["SELECT & Projection","WHERE Filtering","ORDER BY & LIMIT","DISTINCT"]},{"id":"m05-filtering-null-conditional","name":"Filtering, NULL Handling & Conditional Logic","order":5,"type":"practice","subtopics":["IS NULL / IFNULL / COALESCE","CASE WHEN","LIKE & Pattern Matching","UPDATE with Conditionals"]},{"id":"m06-string-date-functions","name":"String & Date Functions","order":6,"type":"practice","subtopics":["String Functions (CONCAT, UPPER, LENGTH)","REGEXP Pattern Matching","Date Functions (DATEDIFF, DATE_FORMAT, DAYOFWEEK)","Math Functions"]},{"id":"m07-joins","name":"Joins","order":7,"type":"practice","subtopics":["INNER JOIN","LEFT / RIGHT JOIN","FULL OUTER JOIN","SELF JOIN","CROSS JOIN","Anti-Joins (NOT IN / NOT EXISTS)"]},{"id":"m08-aggregation-group-by","name":"Aggregation: GROUP BY & HAVING","order":8,"type":"practice","subtopics":["Aggregate Functions (COUNT, SUM, AVG, MIN, MAX)","GROUP BY","HAVING","GROUP_CONCAT","Conditional Aggregation"]},{"id":"m09-subqueries","name":"Subqueries & Correlated Subqueries","order":9,"type":"practice","subtopics":["Scalar Subqueries","Subqueries in WHERE/FROM","Correlated Subqueries","EXISTS / NOT EXISTS"]},{"id":"m10-set-operations","name":"Set Operations","order":10,"type":"practice","subtopics":["UNION vs UNION ALL","INTERSECT","EXCEPT / MINUS"]},{"id":"m11-window-functions","name":"Window Functions","order":11,"type":"practice","subtopics":["ROW_NUMBER, RANK, DENSE_RANK","LAG & LEAD","Running Totals & Moving Averages","PARTITION BY","Gaps & Islands Pattern"]},{"id":"m12-cte-recursive","name":"Common Table Expressions & Recursive Queries","order":12,"type":"practice","subtopics":["WITH Clause / CTEs","Recursive CTEs","Multiple CTEs & Readability"]},{"id":"m13-pivoting-reporting","name":"Pivoting & Advanced Reporting Queries","order":13,"type":"practice","subtopics":["Pivot with CASE WHEN","Cross-Tab Reports","Multi-Step Aggregation Pipelines"]},{"id":"m14-views-procedures-triggers","name":"Views, Stored Procedures, Triggers & Functions","order":14,"type":"theory","subtopics":["Views vs Materialized Views","Stored Procedures","Triggers","User-Defined Functions"]},{"id":"m15-transactions-acid","name":"Transactions & ACID Properties","order":15,"type":"theory","subtopics":["Atomicity, Consistency, Isolation, Durability","COMMIT / ROLLBACK / SAVEPOINT","Transaction Logs"]},{"id":"m16-concurrency-isolation","name":"Concurrency Control, Locking & Isolation Levels","order":16,"type":"theory","subtopics":["Read Uncommitted / Committed / Repeatable Read / Serializable","Dirty Read, Non-Repeatable Read, Phantom Read","Optimistic vs Pessimistic Locking","Deadlocks"]},{"id":"m17-indexing-query-optimization","name":"Indexing & Query Optimization","order":17,"type":"theory","subtopics":["B-Tree vs Hash Indexes","Clustered vs Non-Clustered Indexes","Composite Indexes","Query Execution Plans","EXPLAIN & Query Tuning"]},{"id":"m18-sql-vs-nosql-cap","name":"SQL vs NoSQL, CAP Theorem & Database Types","order":18,"type":"theory","subtopics":["Relational vs Document vs Key-Value vs Column vs Graph DBs","CAP Theorem","ACID vs BASE","When to Choose SQL vs NoSQL"]},{"id":"m19-scaling-replication-sharding","name":"Scaling: Replication, Sharding & Partitioning","order":19,"type":"theory","subtopics":["Vertical vs Horizontal Scaling","Master-Slave / Master-Master Replication","Horizontal & Vertical Partitioning","Sharding Strategies & Hotspots"]},{"id":"m20-oltp-olap-warehousing","name":"OLTP vs OLAP & Data Warehousing Fundamentals","order":20,"type":"theory","subtopics":["OLTP vs OLAP","Star Schema vs Snowflake Schema","Fact & Dimension Tables","ETL Basics"]}],"items":[{"id":"leetcode-175","title":"Combine Two Tables","url":"https://leetcode.com/problems/combine-two-tables","difficulty":"Easy","acceptance":0.795,"companies":["Amazon","Bloomberg","Cognizant","Google","Infosys","Meta"],"recentCompanies":["Amazon","Bloomberg","Google","Meta"],"tags":["Database"],"topicIds":["m07-joins"]},{"id":"leetcode-176","title":"Second Highest Salary","url":"https://leetcode.com/problems/second-highest-salary","difficulty":"Medium","acceptance":0.47,"companies":["Accenture","Amazon","Apple","Bloomberg","Capgemini","Cognizant","Google","HCL","Infosys","LTI","Meta","Microsoft","Oracle","TCS"],"recentCompanies":["Amazon","Bloomberg","Google","Infosys","LTI","Microsoft"],"tags":["Database"],"topicIds":["m09-subqueries"]},{"id":"leetcode-180","title":"Consecutive Numbers","url":"https://leetcode.com/problems/consecutive-numbers","difficulty":"Medium","acceptance":0.484,"companies":["Amazon","Bloomberg","Meta"],"recentCompanies":[],"tags":["Database"],"topicIds":["m11-window-functions"]},{"id":"leetcode-181","title":"Employees Earning More Than Their Managers","url":"https://leetcode.com/problems/employees-earning-more-than-their-managers","difficulty":"Easy","acceptance":0.732,"companies":["Accenture","Amazon","Bloomberg","Cognizant","Meta","TCS"],"recentCompanies":["Bloomberg"],"tags":["Database"],"topicIds":["m07-joins"]},{"id":"leetcode-182","title":"Duplicate Emails","url":"https://leetcode.com/problems/duplicate-emails","difficulty":"Easy","acceptance":0.738,"companies":["Bloomberg","Meta","TCS"],"recentCompanies":[],"tags":["Database"],"topicIds":["m08-aggregation-group-by"]},{"id":"leetcode-183","title":"Customers Who Never Order","url":"https://leetcode.com/problems/customers-who-never-order","difficulty":"Easy","acceptance":0.718,"companies":["Amazon","Bloomberg","Meta"],"recentCompanies":[],"tags":["Database"],"topicIds":["m07-joins"]},{"id":"leetcode-184","title":"Department Highest Salary","url":"https://leetcode.com/problems/department-highest-salary","difficulty":"Medium","acceptance":0.581,"companies":["Amazon","Meta","TCS"],"recentCompanies":[],"tags":["Database"],"topicIds":["m09-subqueries"]},{"id":"leetcode-185","title":"Department Top Three Salaries","url":"https://leetcode.com/problems/department-top-three-salaries","difficulty":"Hard","acceptance":0.605,"companies":["Accenture","Amazon","Bloomberg","HCL","Meta","TCS"],"recentCompanies":[],"tags":["Database"],"topicIds":["m11-window-functions"]},{"id":"leetcode-197","title":"Rising Temperature","url":"https://leetcode.com/problems/rising-temperature","difficulty":"Easy","acceptance":0.513,"companies":["Accenture","Amazon","Bloomberg","Cognizant","Meta"],"recentCompanies":["Amazon","Bloomberg"],"tags":["Database"],"topicIds":["m06-string-date-functions"]},{"id":"leetcode-570","title":"Managers with at Least 5 Direct Reports","url":"https://leetcode.com/problems/managers-with-at-least-5-direct-reports","difficulty":"Medium","acceptance":0.49,"companies":["Amazon","Bloomberg","Meta","TCS"],"recentCompanies":["Amazon"],"tags":["Database"],"topicIds":["m08-aggregation-group-by"]},{"id":"leetcode-584","title":"Find Customer Referee","url":"https://leetcode.com/problems/find-customer-referee","difficulty":"Easy","acceptance":0.729,"companies":["Amazon","Bloomberg","Meta","TCS"],"recentCompanies":["Amazon","Bloomberg","Meta"],"tags":["Database"],"topicIds":["m05-filtering-null-conditional"]},{"id":"leetcode-595","title":"Big Countries","url":"https://leetcode.com/problems/big-countries","difficulty":"Easy","acceptance":0.685,"companies":["Bloomberg","Meta","TCS"],"recentCompanies":["Bloomberg"],"tags":["Database"],"topicIds":["m04-sql-fundamentals"]},{"id":"leetcode-601","title":"Human Traffic of Stadium","url":"https://leetcode.com/problems/human-traffic-of-stadium","difficulty":"Hard","acceptance":0.513,"companies":["Amazon","Bloomberg","Meta"],"recentCompanies":[],"tags":["Database"],"topicIds":["m11-window-functions"]},{"id":"leetcode-602","title":"Friend Requests II: Who Has the Most Friends","url":"https://leetcode.com/problems/friend-requests-ii-who-has-the-most-friends","difficulty":"Medium","acceptance":0.627,"companies":["Amazon","Bloomberg","Meta"],"recentCompanies":[],"tags":["Database"],"topicIds":["m10-set-operations"]},{"id":"leetcode-610","title":"Triangle Judgement","url":"https://leetcode.com/problems/triangle-judgement","difficulty":"Easy","acceptance":0.748,"companies":["Bloomberg","Meta"],"recentCompanies":[],"tags":["Database"],"topicIds":["m05-filtering-null-conditional"]},{"id":"leetcode-1070","title":"Product Sales Analysis III","url":"https://leetcode.com/problems/product-sales-analysis-iii","difficulty":"Medium","acceptance":0.46,"companies":["Amazon","Bloomberg","Meta"],"recentCompanies":["Amazon"],"tags":["Database"],"topicIds":["m09-subqueries"]},{"id":"leetcode-1075","title":"Project Employees I","url":"https://leetcode.com/problems/project-employees-i","difficulty":"Easy","acceptance":0.668,"companies":["Bloomberg","Meta","TCS"],"recentCompanies":[],"tags":["Database"],"topicIds":["m08-aggregation-group-by"]},{"id":"leetcode-550","title":"Game Play Analysis IV","url":"https://leetcode.com/problems/game-play-analysis-iv","difficulty":"Medium","acceptance":0.412,"companies":["Bloomberg","Meta"],"recentCompanies":[],"tags":["Database"],"topicIds":["m11-window-functions"]},{"id":"leetcode-1141","title":"User Activity for the Past 30 Days I","url":"https://leetcode.com/problems/user-activity-for-the-past-30-days-i","difficulty":"Easy","acceptance":0.508,"companies":["Bloomberg","Meta"],"recentCompanies":[],"tags":["Database"],"topicIds":["m06-string-date-functions"]},{"id":"leetcode-1148","title":"Article Views I","url":"https://leetcode.com/problems/article-views-i","difficulty":"Easy","acceptance":0.766,"companies":["Accenture","Bloomberg","Cognizant","LinkedIn","Meta","TCS"],"recentCompanies":[],"tags":["Database"],"topicIds":["m07-joins"]},{"id":"leetcode-1211","title":"Queries Quality and Percentage","url":"https://leetcode.com/problems/queries-quality-and-percentage","difficulty":"Easy","acceptance":0.532,"companies":["Bloomberg","Meta"],"recentCompanies":[],"tags":["Database"],"topicIds":["m08-aggregation-group-by"]},{"id":"leetcode-1251","title":"Average Selling Price","url":"https://leetcode.com/problems/average-selling-price","difficulty":"Easy","acceptance":0.373,"companies":["Amazon","Apple","Bloomberg","Meta"],"recentCompanies":[],"tags":["Database"],"topicIds":["m08-aggregation-group-by"]},{"id":"leetcode-1378","title":"Replace Employee ID With The Unique Identifier","url":"https://leetcode.com/problems/replace-employee-id-with-the-unique-identifier","difficulty":"Easy","acceptance":0.835,"companies":["Bloomberg","Cognizant","Infosys","Meta","TCS"],"recentCompanies":[],"tags":["Database"],"topicIds":["m07-joins"]},{"id":"leetcode-1517","title":"Find Users With Valid E-Mails","url":"https://leetcode.com/problems/find-users-with-valid-e-mails","difficulty":"Easy","acceptance":0.359,"companies":["Bloomberg","Meta"],"recentCompanies":[],"tags":["Database"],"topicIds":["m06-string-date-functions"]},{"id":"leetcode-1581","title":"Customer Who Visited but Did Not Make Any Transactions","url":"https://leetcode.com/problems/customer-who-visited-but-did-not-make-any-transactions","difficulty":"Easy","acceptance":0.677,"companies":["Bloomberg","Meta","TCS"],"recentCompanies":["Meta"],"tags":["Database"],"topicIds":["m07-joins"]},{"id":"leetcode-1661","title":"Average Time of Process per Machine","url":"https://leetcode.com/problems/average-time-of-process-per-machine","difficulty":"Easy","acceptance":0.668,"companies":["Accenture","Amazon","Bloomberg","Meta"],"recentCompanies":[],"tags":["Database"],"topicIds":["m08-aggregation-group-by"]},{"id":"leetcode-1683","title":"Invalid Tweets","url":"https://leetcode.com/problems/invalid-tweets","difficulty":"Easy","acceptance":0.851,"companies":["Bloomberg","Meta"],"recentCompanies":[],"tags":["Database"],"topicIds":["m06-string-date-functions"]},{"id":"leetcode-1731","title":"The Number of Employees Which Report to Each Employee","url":"https://leetcode.com/problems/the-number-of-employees-which-report-to-each-employee","difficulty":"Easy","acceptance":0.533,"companies":["Bloomberg","Meta"],"recentCompanies":[],"tags":["Database"],"topicIds":["m08-aggregation-group-by"]},{"id":"leetcode-1757","title":"Recyclable and Low Fat Products","url":"https://leetcode.com/problems/recyclable-and-low-fat-products","difficulty":"Easy","acceptance":0.886,"companies":["Bloomberg","Meta","TCS"],"recentCompanies":["Bloomberg"],"tags":["Database"],"topicIds":["m04-sql-fundamentals"]},{"id":"leetcode-1789","title":"Primary Department for Each Employee","url":"https://leetcode.com/problems/primary-department-for-each-employee","difficulty":"Easy","acceptance":0.744,"companies":["Bloomberg","Meta"],"recentCompanies":[],"tags":["Database"],"topicIds":["m10-set-operations"]},{"id":"leetcode-1934","title":"Confirmation Rate","url":"https://leetcode.com/problems/confirmation-rate","difficulty":"Medium","acceptance":0.62,"companies":["Bloomberg","Meta"],"recentCompanies":[],"tags":["Database"],"topicIds":["m08-aggregation-group-by"]},{"id":"leetcode-1045","title":"Customers Who Bought All Products","url":"https://leetcode.com/problems/customers-who-bought-all-products","difficulty":"Medium","acceptance":0.64,"companies":["Amazon","Bloomberg","Meta"],"recentCompanies":[],"tags":["Database"],"topicIds":["m09-subqueries"]},{"id":"leetcode-196","title":"Delete Duplicate Emails","url":"https://leetcode.com/problems/delete-duplicate-emails","difficulty":"Easy","acceptance":0.66,"companies":["Amazon","Bloomberg","Infosys","Meta","TCS"],"recentCompanies":[],"tags":["Database"],"topicIds":["m07-joins"]},{"id":"leetcode-1341","title":"Movie Rating","url":"https://leetcode.com/problems/movie-rating","difficulty":"Medium","acceptance":0.434,"companies":["Bloomberg","Meta"],"recentCompanies":[],"tags":["Database"],"topicIds":["m10-set-operations"]},{"id":"leetcode-577","title":"Employee Bonus","url":"https://leetcode.com/problems/employee-bonus","difficulty":"Easy","acceptance":0.774,"companies":["Bloomberg","Meta","TCS"],"recentCompanies":[],"tags":["Database"],"topicIds":["m07-joins"]},{"id":"leetcode-1164","title":"Product Price at a Given Date","url":"https://leetcode.com/problems/product-price-at-a-given-date","difficulty":"Medium","acceptance":0.579,"companies":["Amazon","Bloomberg","Meta"],"recentCompanies":[],"tags":["Database"],"topicIds":["m09-subqueries"]},{"id":"leetcode-1280","title":"Students and Examinations","url":"https://leetcode.com/problems/students-and-examinations","difficulty":"Easy","acceptance":0.612,"companies":["Bloomberg","Cognizant","Meta"],"recentCompanies":[],"tags":["Database"],"topicIds":["m07-joins"]},{"id":"leetcode-1667","title":"Fix Names in a Table","url":"https://leetcode.com/problems/fix-names-in-a-table","difficulty":"Easy","acceptance":0.606,"companies":["Bloomberg","Meta"],"recentCompanies":[],"tags":["Database"],"topicIds":["m06-string-date-functions"]},{"id":"leetcode-1633","title":"Percentage of Users Attended a Contest","url":"https://leetcode.com/problems/percentage-of-users-attended-a-contest","difficulty":"Easy","acceptance":0.603,"companies":["Bloomberg","Meta","Oracle"],"recentCompanies":[],"tags":["Database"],"topicIds":["m08-aggregation-group-by"]},{"id":"leetcode-620","title":"Not Boring Movies","url":"https://leetcode.com/problems/not-boring-movies","difficulty":"Easy","acceptance":0.751,"companies":["Bloomberg","Meta"],"recentCompanies":[],"tags":["Database"],"topicIds":["m04-sql-fundamentals"]},{"id":"leetcode-626","title":"Exchange Seats","url":"https://leetcode.com/problems/exchange-seats","difficulty":"Medium","acceptance":0.742,"companies":["Amazon","Bloomberg","Capgemini","Meta"],"recentCompanies":[],"tags":["Database"],"topicIds":["m05-filtering-null-conditional"]},{"id":"leetcode-585","title":"Investments in 2016","url":"https://leetcode.com/problems/investments-in-2016","difficulty":"Medium","acceptance":0.511,"companies":["Bloomberg","Meta"],"recentCompanies":["Meta"],"tags":["Database"],"topicIds":["m09-subqueries"]},{"id":"leetcode-1174","title":"Immediate Food Delivery II","url":"https://leetcode.com/problems/immediate-food-delivery-ii","difficulty":"Medium","acceptance":0.56,"companies":["Bloomberg","Meta"],"recentCompanies":["Meta"],"tags":["Database"],"topicIds":["m09-subqueries"]},{"id":"leetcode-1193","title":"Monthly Transactions I","url":"https://leetcode.com/problems/monthly-transactions-i","difficulty":"Medium","acceptance":0.592,"companies":["Bloomberg","Meta"],"recentCompanies":[],"tags":["Database"],"topicIds":["m08-aggregation-group-by"]},{"id":"leetcode-1321","title":"Restaurant Growth","url":"https://leetcode.com/problems/restaurant-growth","difficulty":"Medium","acceptance":0.588,"companies":["Amazon","Bloomberg","Meta"],"recentCompanies":["Bloomberg"],"tags":["Database"],"topicIds":["m11-window-functions"]},{"id":"leetcode-1484","title":"Group Sold Products By The Date","url":"https://leetcode.com/problems/group-sold-products-by-the-date","difficulty":"Easy","acceptance":0.779,"companies":["Meta"],"recentCompanies":[],"tags":["Database"],"topicIds":["m08-aggregation-group-by"]},{"id":"leetcode-178","title":"Rank Scores","url":"https://leetcode.com/problems/rank-scores","difficulty":"Medium","acceptance":0.677,"companies":["Accenture","Amazon","Bloomberg","Meta"],"recentCompanies":["Amazon"],"tags":["Database"],"topicIds":["m11-window-functions"]},{"id":"leetcode-1204","title":"Last Person to Fit in the Bus","url":"https://leetcode.com/problems/last-person-to-fit-in-the-bus","difficulty":"Medium","acceptance":0.693,"companies":["Bloomberg","Meta"],"recentCompanies":[],"tags":["Database"],"topicIds":["m11-window-functions"]},{"id":"leetcode-1068","title":"Product Sales Analysis I","url":"https://leetcode.com/problems/product-sales-analysis-i","difficulty":"Easy","acceptance":0.858,"companies":["Amazon","Bloomberg","Cognizant","Meta","TCS"],"recentCompanies":[],"tags":["Database"],"topicIds":["m07-joins"]},{"id":"leetcode-607","title":"Sales Person","url":"https://leetcode.com/problems/sales-person","difficulty":"Easy","acceptance":0.66,"companies":["Bloomberg","Meta"],"recentCompanies":[],"tags":["Database"],"topicIds":["m07-joins"]},{"id":"leetcode-627","title":"Swap Sex of Employees","url":"https://leetcode.com/problems/swap-sex-of-employees","difficulty":"Easy","acceptance":0.846,"companies":["Amazon","Bloomberg","Meta"],"recentCompanies":[],"tags":["Database"],"topicIds":["m05-filtering-null-conditional"]},{"id":"leetcode-511","title":"Game Play Analysis I","url":"https://leetcode.com/problems/game-play-analysis-i","difficulty":"Easy","acceptance":0.764,"companies":["Bloomberg","Meta"],"recentCompanies":[],"tags":["Database"],"topicIds":["m08-aggregation-group-by"]},{"id":"leetcode-1179","title":"Reformat Department Table","url":"https://leetcode.com/problems/reformat-department-table","difficulty":"Easy","acceptance":0.763,"companies":["Amazon","Meta"],"recentCompanies":[],"tags":["Database"],"topicIds":["m13-pivoting-reporting"]},{"id":"leetcode-3570","title":"Find Books with No Available Copies","url":"https://leetcode.com/problems/find-books-with-no-available-copies","difficulty":"Easy","acceptance":0.54,"companies":["Meta"],"recentCompanies":[],"tags":["Database"],"topicIds":["m08-aggregation-group-by"]},{"id":"leetcode-608","title":"Tree Node","url":"https://leetcode.com/problems/tree-node","difficulty":"Medium","acceptance":0.757,"companies":["Bloomberg","Meta","Twitter"],"recentCompanies":[],"tags":["Database"],"topicIds":["m05-filtering-null-conditional"]},{"id":"leetcode-1393","title":"Capital Gain/Loss","url":"https://leetcode.com/problems/capital-gainloss","difficulty":"Medium","acceptance":0.846,"companies":["Meta"],"recentCompanies":[],"tags":["Database"],"topicIds":["m08-aggregation-group-by"]},{"id":"leetcode-177","title":"Nth Highest Salary","url":"https://leetcode.com/problems/nth-highest-salary","difficulty":"Medium","acceptance":0.392,"companies":["Accenture","Amazon","Atlassian","Bloomberg","Google","Meta"],"recentCompanies":["Amazon","Meta"],"tags":["Database"],"topicIds":["m09-subqueries"]},{"id":"leetcode-1795","title":"Rearrange Products Table","url":"https://leetcode.com/problems/rearrange-products-table","difficulty":"Easy","acceptance":0.855,"companies":["Amazon","Meta"],"recentCompanies":[],"tags":["Database"],"topicIds":["m10-set-operations"]},{"id":"leetcode-1527","title":"Patients With a Condition","url":"https://leetcode.com/problems/patients-with-a-condition","difficulty":"Easy","acceptance":0.389,"companies":["Bloomberg"],"recentCompanies":[],"tags":["Database"],"topicIds":["m05-filtering-null-conditional"]},{"id":"leetcode-1978","title":"Employees Whose Manager Left the Company","url":"https://leetcode.com/problems/employees-whose-manager-left-the-company","difficulty":"Easy","acceptance":0.487,"companies":["Bloomberg"],"recentCompanies":[],"tags":["Database"],"topicIds":["m09-subqueries"]},{"id":"leetcode-1907","title":"Count Salary Categories","url":"https://leetcode.com/problems/count-salary-categories","difficulty":"Medium","acceptance":0.644,"companies":["Bloomberg"],"recentCompanies":[],"tags":["Database"],"topicIds":["m13-pivoting-reporting"]},{"id":"leetcode-1084","title":"Sales Analysis III","url":"https://leetcode.com/problems/sales-analysis-iii","difficulty":"Easy","acceptance":0.476,"companies":["Amazon","Bloomberg"],"recentCompanies":[],"tags":["Database"],"topicIds":["m08-aggregation-group-by"]},{"id":"leetcode-619","title":"Biggest Single Number","url":"https://leetcode.com/problems/biggest-single-number","difficulty":"Easy","acceptance":0.713,"companies":["Bloomberg"],"recentCompanies":[],"tags":["Database"],"topicIds":["m08-aggregation-group-by"]},{"id":"leetcode-1729","title":"Find Followers Count","url":"https://leetcode.com/problems/find-followers-count","difficulty":"Easy","acceptance":0.696,"companies":["Bloomberg"],"recentCompanies":[],"tags":["Database"],"topicIds":["m08-aggregation-group-by"]},{"id":"leetcode-1158","title":"Market Analysis I","url":"https://leetcode.com/problems/market-analysis-i","difficulty":"Medium","acceptance":0.573,"companies":["Bloomberg"],"recentCompanies":[],"tags":["Database"],"topicIds":["m07-joins"]},{"id":"leetcode-262","title":"Trips and Users","url":"https://leetcode.com/problems/trips-and-users","difficulty":"Hard","acceptance":0.383,"companies":["Amazon","Bloomberg","Uber"],"recentCompanies":[],"tags":["Database"],"topicIds":["m13-pivoting-reporting"]},{"id":"leetcode-3497","title":"Analyze Subscription Conversion","url":"https://leetcode.com/problems/analyze-subscription-conversion","difficulty":"Medium","acceptance":0.744,"companies":["Bloomberg"],"recentCompanies":[],"tags":["Database"],"topicIds":["m08-aggregation-group-by"]},{"id":"leetcode-1693","title":"Daily Leads and Partners","url":"https://leetcode.com/problems/daily-leads-and-partners","difficulty":"Easy","acceptance":0.866,"companies":["Bloomberg"],"recentCompanies":[],"tags":["Database"],"topicIds":["m08-aggregation-group-by"]},{"id":"leetcode-596","title":"Classes With at Least 5 Students","url":"https://leetcode.com/problems/classes-with-at-least-5-students","difficulty":"Easy","acceptance":0.638,"companies":["Bloomberg"],"recentCompanies":[],"tags":["Database"],"topicIds":["m08-aggregation-group-by"]},{"id":"leetcode-2356","title":"Number of Unique Subjects Taught by Each Teacher","url":"https://leetcode.com/problems/number-of-unique-subjects-taught-by-each-teacher","difficulty":"Easy","acceptance":0.892,"companies":["Capgemini"],"recentCompanies":[],"tags":["Database"],"topicIds":["m08-aggregation-group-by"]},{"id":"leetcode-578","title":"Get Highest Answer Rate Question","url":"https://leetcode.com/problems/get-highest-answer-rate-question","difficulty":"Medium","acceptance":0.401,"companies":["Meta"],"recentCompanies":[],"tags":["Database"],"topicIds":["m09-subqueries"]},{"id":"leetcode-597","title":"Friend Requests I: Overall Acceptance Rate","url":"https://leetcode.com/problems/friend-requests-i-overall-acceptance-rate","difficulty":"Easy","acceptance":0.411,"companies":["Meta"],"recentCompanies":[],"tags":["Database"],"topicIds":["m08-aggregation-group-by"]},{"id":"leetcode-1076","title":"Project Employees II","url":"https://leetcode.com/problems/project-employees-ii","difficulty":"Easy","acceptance":0.504,"companies":["Meta"],"recentCompanies":[],"tags":["Database"],"topicIds":["m09-subqueries"]},{"id":"leetcode-1077","title":"Project Employees III","url":"https://leetcode.com/problems/project-employees-iii","difficulty":"Medium","acceptance":0.772,"companies":["Meta"],"recentCompanies":[],"tags":["Database"],"topicIds":["m11-window-functions"]},{"id":"leetcode-1113","title":"Reported Posts","url":"https://leetcode.com/problems/reported-posts","difficulty":"Easy","acceptance":0.648,"companies":["Meta"],"recentCompanies":[],"tags":["Database"],"topicIds":["m08-aggregation-group-by"]},{"id":"leetcode-1132","title":"Reported Posts II","url":"https://leetcode.com/problems/reported-posts-ii","difficulty":"Medium","acceptance":0.32,"companies":["Meta"],"recentCompanies":[],"tags":["Database"],"topicIds":["m08-aggregation-group-by"]},{"id":"leetcode-1142","title":"User Activity for the Past 30 Days II","url":"https://leetcode.com/problems/user-activity-for-the-past-30-days-ii","difficulty":"Easy","acceptance":0.356,"companies":["Meta"],"recentCompanies":[],"tags":["Database"],"topicIds":["m08-aggregation-group-by"]},{"id":"leetcode-1225","title":"Report Contiguous Dates","url":"https://leetcode.com/problems/report-contiguous-dates","difficulty":"Hard","acceptance":0.571,"companies":["Amazon","Meta"],"recentCompanies":[],"tags":["Database"],"topicIds":["m11-window-functions"]},{"id":"leetcode-1241","title":"Number of Comments per Post","url":"https://leetcode.com/problems/number-of-comments-per-post","difficulty":"Easy","acceptance":0.656,"companies":["Meta"],"recentCompanies":[],"tags":["Database"],"topicIds":["m08-aggregation-group-by"]},{"id":"leetcode-1264","title":"Page Recommendations","url":"https://leetcode.com/problems/page-recommendations","difficulty":"Medium","acceptance":0.654,"companies":["Meta"],"recentCompanies":[],"tags":["Database"],"topicIds":["m09-subqueries"]},{"id":"leetcode-1322","title":"Ads Performance","url":"https://leetcode.com/problems/ads-performance","difficulty":"Easy","acceptance":0.586,"companies":["Meta"],"recentCompanies":[],"tags":["Database"],"topicIds":["m08-aggregation-group-by"]},{"id":"leetcode-1398","title":"Customers Who Bought Products A and B but Not C","url":"https://leetcode.com/problems/customers-who-bought-products-a-and-b-but-not-c","difficulty":"Medium","acceptance":0.715,"companies":["Meta"],"recentCompanies":[],"tags":["Database"],"topicIds":["m08-aggregation-group-by"]},{"id":"leetcode-1445","title":"Apples & Oranges","url":"https://leetcode.com/problems/apples-oranges","difficulty":"Medium","acceptance":0.86,"companies":["Meta"],"recentCompanies":[],"tags":["Database"],"topicIds":["m08-aggregation-group-by"]},{"id":"leetcode-1892","title":"Page Recommendations II","url":"https://leetcode.com/problems/page-recommendations-ii","difficulty":"Hard","acceptance":0.457,"companies":["Meta"],"recentCompanies":[],"tags":["Database"],"topicIds":["m11-window-functions"]},{"id":"leetcode-1949","title":"Strong Friendship","url":"https://leetcode.com/problems/strong-friendship","difficulty":"Medium","acceptance":0.546,"companies":["Meta"],"recentCompanies":[],"tags":["Database"],"topicIds":["m09-subqueries"]},{"id":"leetcode-2199","title":"Finding the Topic of Each Post","url":"https://leetcode.com/problems/finding-the-topic-of-each-post","difficulty":"Hard","acceptance":0.504,"companies":["Meta"],"recentCompanies":[],"tags":["Database"],"topicIds":["m06-string-date-functions"]},{"id":"leetcode-1098","title":"Unpopular Books","url":"https://leetcode.com/problems/unpopular-books","difficulty":"Medium","acceptance":0.434,"companies":["Meta"],"recentCompanies":[],"tags":["Database"],"topicIds":["m07-joins"]},{"id":"leetcode-612","title":"Shortest Distance in a Plane","url":"https://leetcode.com/problems/shortest-distance-in-a-plane","difficulty":"Medium","acceptance":0.61,"companies":["Meta"],"recentCompanies":[],"tags":["Database"],"topicIds":["m06-string-date-functions"]},{"id":"leetcode-2993","title":"Friday Purchases I","url":"https://leetcode.com/problems/friday-purchases-i","difficulty":"Medium","acceptance":0.811,"companies":["TCS"],"recentCompanies":[],"tags":["Database"],"topicIds":["m06-string-date-functions"]},{"id":"leetcode-1613","title":"Find the Missing IDs","url":"https://leetcode.com/problems/find-the-missing-ids","difficulty":"Medium","topicIds":["m12-cte-recursive"],"acceptance":null,"companies":["Amazon"],"recentCompanies":[],"tags":["Database"],"note":"Topic-completeness addition \u2014 not part of the 24 May 2026 company-tag scrape; no company data available this session."},{"id":"leetcode-2308","title":"Arrange Table by Gender","url":"https://leetcode.com/problems/arrange-table-by-gender","difficulty":"Hard","topicIds":["m13-pivoting-reporting"],"acceptance":null,"companies":[],"recentCompanies":[],"tags":["Database"],"note":"Topic-completeness addition \u2014 not part of the 24 May 2026 company-tag scrape; no company data available this session."},{"id":"leetcode-1596","title":"The Most Frequently Ordered Products for Each Customer","url":"https://leetcode.com/problems/the-most-frequently-ordered-products-for-each-customer","difficulty":"Medium","topicIds":["m11-window-functions"],"acceptance":null,"companies":["Amazon"],"recentCompanies":[],"tags":["Database"],"note":"Topic-completeness addition \u2014 not part of the 24 May 2026 company-tag scrape; no company data available this session."},{"id":"leetcode-2173","title":"Longest Winning Streak","url":"https://leetcode.com/problems/longest-winning-streak","difficulty":"Hard","topicIds":["m11-window-functions"],"acceptance":null,"companies":[],"recentCompanies":[],"tags":["Database"],"note":"Topic-completeness addition \u2014 not part of the 24 May 2026 company-tag scrape; no company data available this session."},{"id":"leetcode-1607","title":"Sellers With No Sales","url":"https://leetcode.com/problems/sellers-with-no-sales","difficulty":"Easy","topicIds":["m07-joins"],"acceptance":null,"companies":[],"recentCompanies":[],"tags":["Database"],"note":"Topic-completeness addition \u2014 not part of the 24 May 2026 company-tag scrape; no company data available this session."},{"id":"leetcode-1350","title":"Students With Invalid Departments","url":"https://leetcode.com/problems/students-with-invalid-departments","difficulty":"Easy","topicIds":["m07-joins"],"acceptance":null,"companies":["Amazon"],"recentCompanies":[],"tags":["Database"],"note":"Topic-completeness addition \u2014 not part of the 24 May 2026 company-tag scrape; no company data available this session."},{"id":"leetcode-1741","title":"Find Total Time Spent by Each Employee","url":"https://leetcode.com/problems/find-total-time-spent-by-each-employee","difficulty":"Easy","topicIds":["m08-aggregation-group-by"],"acceptance":null,"companies":["Amazon"],"recentCompanies":[],"tags":["Database"],"note":"Topic-completeness addition \u2014 not part of the 24 May 2026 company-tag scrape; no company data available this session."},{"id":"leetcode-1873","title":"Calculate Special Bonus","url":"https://leetcode.com/problems/calculate-special-bonus","difficulty":"Easy","topicIds":["m05-filtering-null-conditional"],"acceptance":null,"companies":[],"recentCompanies":[],"tags":["Database"],"note":"Topic-completeness addition \u2014 not part of the 24 May 2026 company-tag scrape; no company data available this session."},{"id":"leetcode-1587","title":"Bank Account Summary II","url":"https://leetcode.com/problems/bank-account-summary-ii","difficulty":"Easy","topicIds":["m08-aggregation-group-by"],"acceptance":null,"companies":[],"recentCompanies":[],"tags":["Database"],"note":"Topic-completeness addition \u2014 not part of the 24 May 2026 company-tag scrape; no company data available this session."},{"id":"leetcode-1050","title":"Actors and Directors Who Cooperated At Least Three Times","url":"https://leetcode.com/problems/actors-and-directors-who-cooperated-at-least-three-times","difficulty":"Easy","acceptance":0.724,"companies":["Amazon"],"recentCompanies":[],"tags":["Database"],"topicIds":["m08-aggregation-group-by"]},{"id":"leetcode-1069","title":"Product Sales Analysis II","url":"https://leetcode.com/problems/product-sales-analysis-ii","difficulty":"Easy","acceptance":0.831,"companies":["Amazon"],"recentCompanies":[],"tags":["Database"],"topicIds":["m07-joins"]},{"id":"leetcode-1082","title":"Sales Analysis I","url":"https://leetcode.com/problems/sales-analysis-i","difficulty":"Easy","acceptance":0.748,"companies":["Amazon"],"recentCompanies":[],"tags":["Database"],"topicIds":["m08-aggregation-group-by"]},{"id":"leetcode-1083","title":"Sales Analysis II","url":"https://leetcode.com/problems/sales-analysis-ii","difficulty":"Easy","acceptance":0.508,"companies":["Amazon"],"recentCompanies":[],"tags":["Database"],"topicIds":["m08-aggregation-group-by"]},{"id":"leetcode-1107","title":"New Users Daily Count","url":"https://leetcode.com/problems/new-users-daily-count","difficulty":"Medium","acceptance":0.459,"companies":["LinkedIn"],"recentCompanies":[],"tags":["Database"],"topicIds":["m09-subqueries"]},{"id":"leetcode-1127","title":"User Purchase Platform","url":"https://leetcode.com/problems/user-purchase-platform","difficulty":"Hard","acceptance":0.511,"companies":["LinkedIn"],"recentCompanies":[],"tags":["Database"],"topicIds":["m13-pivoting-reporting"]},{"id":"leetcode-1149","title":"Article Views II","url":"https://leetcode.com/problems/article-views-ii","difficulty":"Medium","acceptance":0.481,"companies":["LinkedIn"],"recentCompanies":[],"tags":["Database"],"topicIds":["m07-joins"]},{"id":"leetcode-1270","title":"All People Report to the Given Manager","url":"https://leetcode.com/problems/all-people-report-to-the-given-manager","difficulty":"Medium","acceptance":0.883,"companies":["Amazon"],"recentCompanies":[],"tags":["Database"],"topicIds":["m12-cte-recursive"]},{"id":"leetcode-1285","title":"Find the Start and End Number of Continuous Ranges","url":"https://leetcode.com/problems/find-the-start-and-end-number-of-continuous-ranges","difficulty":"Medium","acceptance":0.88,"companies":[],"recentCompanies":[],"tags":["Database"],"topicIds":["m11-window-functions"]},{"id":"leetcode-1303","title":"Find the Team Size","url":"https://leetcode.com/problems/find-the-team-size","difficulty":"Easy","acceptance":0.903,"companies":["Amazon"],"recentCompanies":[],"tags":["Database"],"topicIds":["m11-window-functions"]},{"id":"leetcode-1327","title":"List the Products Ordered in a Period","url":"https://leetcode.com/problems/list-the-products-ordered-in-a-period","difficulty":"Easy","acceptance":0.778,"companies":["Amazon"],"recentCompanies":[],"tags":["Database"],"topicIds":["m08-aggregation-group-by"]},{"id":"leetcode-1421","title":"NPV Queries","url":"https://leetcode.com/problems/npv-queries","difficulty":"Medium","acceptance":0.822,"companies":["Amazon"],"recentCompanies":[],"tags":["Database"],"topicIds":["m07-joins"]},{"id":"leetcode-1454","title":"Active Users","url":"https://leetcode.com/problems/active-users","difficulty":"Medium","acceptance":0.385,"companies":[],"recentCompanies":[],"tags":["Database"],"topicIds":["m07-joins"]},{"id":"leetcode-1479","title":"Sales by Day of the Week","url":"https://leetcode.com/problems/sales-by-day-of-the-week","difficulty":"Hard","acceptance":0.823,"companies":["Amazon"],"recentCompanies":[],"tags":["Database"],"topicIds":["m13-pivoting-reporting"]},{"id":"leetcode-1495","title":"Friendly Movies Streamed Last Month","url":"https://leetcode.com/problems/friendly-movies-streamed-last-month","difficulty":"Easy","acceptance":0.508,"companies":["Amazon"],"recentCompanies":[],"tags":["Database"],"topicIds":["m09-subqueries"]},{"id":"leetcode-1511","title":"Customer Order Frequency","url":"https://leetcode.com/problems/customer-order-frequency","difficulty":"Easy","acceptance":0.741,"companies":["Amazon"],"recentCompanies":[],"tags":["Database"],"topicIds":["m08-aggregation-group-by"]},{"id":"leetcode-1571","title":"Warehouse Manager","url":"https://leetcode.com/problems/warehouse-manager","difficulty":"Easy","acceptance":0.899,"companies":["Amazon"],"recentCompanies":[],"tags":["Database"],"topicIds":["m08-aggregation-group-by"]},{"id":"leetcode-1623","title":"All Valid Triplets That Can Represent a Country","url":"https://leetcode.com/problems/all-valid-triplets-that-can-represent-a-country","difficulty":"Easy","acceptance":0.888,"companies":["Amazon"],"recentCompanies":[],"tags":["Database"],"topicIds":["m07-joins"]},{"id":"leetcode-1699","title":"Number of Calls Between Two Persons","url":"https://leetcode.com/problems/number-of-calls-between-two-persons","difficulty":"Medium","acceptance":0.861,"companies":["Amazon"],"recentCompanies":[],"tags":["Database"],"topicIds":["m08-aggregation-group-by"]},{"id":"leetcode-1777","title":"Product's Price for Each Store","url":"https://leetcode.com/problems/products-price-for-each-store","difficulty":"Easy","acceptance":0.864,"companies":["Amazon"],"recentCompanies":[],"tags":["Database"],"topicIds":["m13-pivoting-reporting"]},{"id":"leetcode-1783","title":"Grand Slam Titles","url":"https://leetcode.com/problems/grand-slam-titles","difficulty":"Medium","acceptance":0.905,"companies":["Amazon"],"recentCompanies":[],"tags":["Database"],"topicIds":["m10-set-operations"]},{"id":"leetcode-1809","title":"Ad-Free Sessions","url":"https://leetcode.com/problems/ad-free-sessions","difficulty":"Easy","acceptance":0.618,"companies":["Amazon"],"recentCompanies":[],"tags":["Database"],"topicIds":["m09-subqueries"]},{"id":"leetcode-1811","title":"Find Interview Candidates","url":"https://leetcode.com/problems/find-interview-candidates","difficulty":"Medium","acceptance":0.66,"companies":["Amazon"],"recentCompanies":[],"tags":["Database"],"topicIds":["m11-window-functions"]},{"id":"leetcode-579","title":"Find Cumulative Salary of an Employee","url":"https://leetcode.com/problems/find-cumulative-salary-of-an-employee","difficulty":"Hard","acceptance":0.395,"companies":["Amazon"],"recentCompanies":[],"tags":["Database"],"topicIds":["m11-window-functions"]},{"id":"leetcode-586","title":"Customer Placing the Largest Number of Orders","url":"https://leetcode.com/problems/customer-placing-the-largest-number-of-orders","difficulty":"Easy","acceptance":0.757,"companies":["Amazon","Twitter"],"recentCompanies":[],"tags":["Database"],"topicIds":["m08-aggregation-group-by"]},{"id":"leetcode-603","title":"Consecutive Available Seats","url":"https://leetcode.com/problems/consecutive-available-seats","difficulty":"Easy","acceptance":0.67,"companies":[],"recentCompanies":[],"tags":["Database"],"topicIds":["m11-window-functions"]},{"id":"leetcode-615","title":"Average Salary: Departments VS Company","url":"https://leetcode.com/problems/average-salary-departments-vs-company","difficulty":"Hard","acceptance":0.548,"companies":[],"recentCompanies":[],"tags":["Database"],"topicIds":["m11-window-functions"]},{"id":"leetcode-618","title":"Students Report By Geography","url":"https://leetcode.com/problems/students-report-by-geography","difficulty":"Hard","acceptance":0.621,"companies":[],"recentCompanies":[],"tags":["Database"],"topicIds":["m13-pivoting-reporting"]}]}
+{
+  "category": "database",
+  "uiConfig": {
+    "primaryViewTitle": "Syllabus Roadmap",
+    "primaryViewSubtitle": "start → end"
+  },
+  "note": "DB syllabus roadmap for FAANG prep. Practice modules (m04-m13) map every SQL problem to the DBMS concept it drills; theory modules (m01-m03, m14-m20) cover schema design, transactions, indexing, and scaling concepts asked in DB/system-design rounds but have no LeetCode problems attached. Sources merged: the original 8-company scrape (dsa-seed-systemdesign-db-setaside.json, 64 database-sql problems) and the newer 20-company 24 May 2026 scrape (89 problems), with a small set of well-known supplemental problems (flagged individually) added to fill thin modules (CTE/Recursive, Pivoting, Window ties). Company lists are unioned across sources; 'recentCompanies' reflects the most current data available for that problem.",
+  "companyDataAsOf": "2026-05-24",
+  "companyDataSource": "LeetCode company tags, snapshot 24 May 2026 (github.com/snehasishroy/leetcode-companywise-interview-questions); Database-tag confirmation from github.com/neenza/leetcode-problems and github.com/doocs/leetcode",
+  "topics": [
+    {
+      "id": "m01-relational-model-er-design",
+      "name": "Relational Model, ER Diagrams & Database Design",
+      "order": 1,
+      "type": "theory",
+      "subtopics": [
+        "Entities, Attributes & Relationships",
+        "ER Diagrams & Cardinality",
+        "Mapping ER to Relational Schema",
+        "Schema Design Trade-offs"
+      ]
+    },
+    {
+      "id": "m02-keys-constraints-relationships",
+      "name": "Keys, Constraints & Relationships",
+      "order": 2,
+      "type": "theory",
+      "subtopics": [
+        "Primary Key / Foreign Key / Candidate Key / Super Key",
+        "Unique, Not Null & Check Constraints",
+        "Referential Integrity",
+        "One-to-One, One-to-Many, Many-to-Many"
+      ]
+    },
+    {
+      "id": "m03-normalization-denormalization",
+      "name": "Normalization & Denormalization",
+      "order": 3,
+      "type": "theory",
+      "subtopics": [
+        "Functional Dependencies",
+        "1NF, 2NF, 3NF, BCNF",
+        "Denormalization Trade-offs",
+        "When to Normalize vs Denormalize"
+      ]
+    },
+    {
+      "id": "m04-sql-fundamentals",
+      "name": "SQL Fundamentals",
+      "order": 4,
+      "type": "practice",
+      "subtopics": ["SELECT & Projection", "WHERE Filtering", "ORDER BY & LIMIT", "DISTINCT"]
+    },
+    {
+      "id": "m05-filtering-null-conditional",
+      "name": "Filtering, NULL Handling & Conditional Logic",
+      "order": 5,
+      "type": "practice",
+      "subtopics": [
+        "IS NULL / IFNULL / COALESCE",
+        "CASE WHEN",
+        "LIKE & Pattern Matching",
+        "UPDATE with Conditionals"
+      ]
+    },
+    {
+      "id": "m06-string-date-functions",
+      "name": "String & Date Functions",
+      "order": 6,
+      "type": "practice",
+      "subtopics": [
+        "String Functions (CONCAT, UPPER, LENGTH)",
+        "REGEXP Pattern Matching",
+        "Date Functions (DATEDIFF, DATE_FORMAT, DAYOFWEEK)",
+        "Math Functions"
+      ]
+    },
+    {
+      "id": "m07-joins",
+      "name": "Joins",
+      "order": 7,
+      "type": "practice",
+      "subtopics": [
+        "INNER JOIN",
+        "LEFT / RIGHT JOIN",
+        "FULL OUTER JOIN",
+        "SELF JOIN",
+        "CROSS JOIN",
+        "Anti-Joins (NOT IN / NOT EXISTS)"
+      ]
+    },
+    {
+      "id": "m08-aggregation-group-by",
+      "name": "Aggregation: GROUP BY & HAVING",
+      "order": 8,
+      "type": "practice",
+      "subtopics": [
+        "Aggregate Functions (COUNT, SUM, AVG, MIN, MAX)",
+        "GROUP BY",
+        "HAVING",
+        "GROUP_CONCAT",
+        "Conditional Aggregation"
+      ]
+    },
+    {
+      "id": "m09-subqueries",
+      "name": "Subqueries & Correlated Subqueries",
+      "order": 9,
+      "type": "practice",
+      "subtopics": [
+        "Scalar Subqueries",
+        "Subqueries in WHERE/FROM",
+        "Correlated Subqueries",
+        "EXISTS / NOT EXISTS"
+      ]
+    },
+    {
+      "id": "m10-set-operations",
+      "name": "Set Operations",
+      "order": 10,
+      "type": "practice",
+      "subtopics": ["UNION vs UNION ALL", "INTERSECT", "EXCEPT / MINUS"]
+    },
+    {
+      "id": "m11-window-functions",
+      "name": "Window Functions",
+      "order": 11,
+      "type": "practice",
+      "subtopics": [
+        "ROW_NUMBER, RANK, DENSE_RANK",
+        "LAG & LEAD",
+        "Running Totals & Moving Averages",
+        "PARTITION BY",
+        "Gaps & Islands Pattern"
+      ]
+    },
+    {
+      "id": "m12-cte-recursive",
+      "name": "Common Table Expressions & Recursive Queries",
+      "order": 12,
+      "type": "practice",
+      "subtopics": ["WITH Clause / CTEs", "Recursive CTEs", "Multiple CTEs & Readability"]
+    },
+    {
+      "id": "m13-pivoting-reporting",
+      "name": "Pivoting & Advanced Reporting Queries",
+      "order": 13,
+      "type": "practice",
+      "subtopics": ["Pivot with CASE WHEN", "Cross-Tab Reports", "Multi-Step Aggregation Pipelines"]
+    },
+    {
+      "id": "m14-views-procedures-triggers",
+      "name": "Views, Stored Procedures, Triggers & Functions",
+      "order": 14,
+      "type": "theory",
+      "subtopics": [
+        "Views vs Materialized Views",
+        "Stored Procedures",
+        "Triggers",
+        "User-Defined Functions"
+      ]
+    },
+    {
+      "id": "m15-transactions-acid",
+      "name": "Transactions & ACID Properties",
+      "order": 15,
+      "type": "theory",
+      "subtopics": [
+        "Atomicity, Consistency, Isolation, Durability",
+        "COMMIT / ROLLBACK / SAVEPOINT",
+        "Transaction Logs"
+      ]
+    },
+    {
+      "id": "m16-concurrency-isolation",
+      "name": "Concurrency Control, Locking & Isolation Levels",
+      "order": 16,
+      "type": "theory",
+      "subtopics": [
+        "Read Uncommitted / Committed / Repeatable Read / Serializable",
+        "Dirty Read, Non-Repeatable Read, Phantom Read",
+        "Optimistic vs Pessimistic Locking",
+        "Deadlocks"
+      ]
+    },
+    {
+      "id": "m17-indexing-query-optimization",
+      "name": "Indexing & Query Optimization",
+      "order": 17,
+      "type": "theory",
+      "subtopics": [
+        "B-Tree vs Hash Indexes",
+        "Clustered vs Non-Clustered Indexes",
+        "Composite Indexes",
+        "Query Execution Plans",
+        "EXPLAIN & Query Tuning"
+      ]
+    },
+    {
+      "id": "m18-sql-vs-nosql-cap",
+      "name": "SQL vs NoSQL, CAP Theorem & Database Types",
+      "order": 18,
+      "type": "theory",
+      "subtopics": [
+        "Relational vs Document vs Key-Value vs Column vs Graph DBs",
+        "CAP Theorem",
+        "ACID vs BASE",
+        "When to Choose SQL vs NoSQL"
+      ]
+    },
+    {
+      "id": "m19-scaling-replication-sharding",
+      "name": "Scaling: Replication, Sharding & Partitioning",
+      "order": 19,
+      "type": "theory",
+      "subtopics": [
+        "Vertical vs Horizontal Scaling",
+        "Master-Slave / Master-Master Replication",
+        "Horizontal & Vertical Partitioning",
+        "Sharding Strategies & Hotspots"
+      ]
+    },
+    {
+      "id": "m20-oltp-olap-warehousing",
+      "name": "OLTP vs OLAP & Data Warehousing Fundamentals",
+      "order": 20,
+      "type": "theory",
+      "subtopics": [
+        "OLTP vs OLAP",
+        "Star Schema vs Snowflake Schema",
+        "Fact & Dimension Tables",
+        "ETL Basics"
+      ]
+    }
+  ],
+  "items": [
+    {
+      "id": "leetcode-175",
+      "title": "Combine Two Tables",
+      "url": "https://leetcode.com/problems/combine-two-tables",
+      "difficulty": "Easy",
+      "acceptance": 0.795,
+      "companies": ["Amazon", "Bloomberg", "Cognizant", "Google", "Infosys", "Meta"],
+      "recentCompanies": ["Amazon", "Bloomberg", "Google", "Meta"],
+      "tags": ["Database"],
+      "topicIds": ["m07-joins"]
+    },
+    {
+      "id": "leetcode-176",
+      "title": "Second Highest Salary",
+      "url": "https://leetcode.com/problems/second-highest-salary",
+      "difficulty": "Medium",
+      "acceptance": 0.47,
+      "companies": [
+        "Accenture",
+        "Amazon",
+        "Apple",
+        "Bloomberg",
+        "Capgemini",
+        "Cognizant",
+        "Google",
+        "HCL",
+        "Infosys",
+        "LTI",
+        "Meta",
+        "Microsoft",
+        "Oracle",
+        "TCS"
+      ],
+      "recentCompanies": ["Amazon", "Bloomberg", "Google", "Infosys", "LTI", "Microsoft"],
+      "tags": ["Database"],
+      "topicIds": ["m09-subqueries"]
+    },
+    {
+      "id": "leetcode-180",
+      "title": "Consecutive Numbers",
+      "url": "https://leetcode.com/problems/consecutive-numbers",
+      "difficulty": "Medium",
+      "acceptance": 0.484,
+      "companies": ["Amazon", "Bloomberg", "Meta"],
+      "recentCompanies": [],
+      "tags": ["Database"],
+      "topicIds": ["m11-window-functions"]
+    },
+    {
+      "id": "leetcode-181",
+      "title": "Employees Earning More Than Their Managers",
+      "url": "https://leetcode.com/problems/employees-earning-more-than-their-managers",
+      "difficulty": "Easy",
+      "acceptance": 0.732,
+      "companies": ["Accenture", "Amazon", "Bloomberg", "Cognizant", "Meta", "TCS"],
+      "recentCompanies": ["Bloomberg"],
+      "tags": ["Database"],
+      "topicIds": ["m07-joins"]
+    },
+    {
+      "id": "leetcode-182",
+      "title": "Duplicate Emails",
+      "url": "https://leetcode.com/problems/duplicate-emails",
+      "difficulty": "Easy",
+      "acceptance": 0.738,
+      "companies": ["Bloomberg", "Meta", "TCS"],
+      "recentCompanies": [],
+      "tags": ["Database"],
+      "topicIds": ["m08-aggregation-group-by"]
+    },
+    {
+      "id": "leetcode-183",
+      "title": "Customers Who Never Order",
+      "url": "https://leetcode.com/problems/customers-who-never-order",
+      "difficulty": "Easy",
+      "acceptance": 0.718,
+      "companies": ["Amazon", "Bloomberg", "Meta"],
+      "recentCompanies": [],
+      "tags": ["Database"],
+      "topicIds": ["m07-joins"]
+    },
+    {
+      "id": "leetcode-184",
+      "title": "Department Highest Salary",
+      "url": "https://leetcode.com/problems/department-highest-salary",
+      "difficulty": "Medium",
+      "acceptance": 0.581,
+      "companies": ["Amazon", "Meta", "TCS"],
+      "recentCompanies": [],
+      "tags": ["Database"],
+      "topicIds": ["m09-subqueries"]
+    },
+    {
+      "id": "leetcode-185",
+      "title": "Department Top Three Salaries",
+      "url": "https://leetcode.com/problems/department-top-three-salaries",
+      "difficulty": "Hard",
+      "acceptance": 0.605,
+      "companies": ["Accenture", "Amazon", "Bloomberg", "HCL", "Meta", "TCS"],
+      "recentCompanies": [],
+      "tags": ["Database"],
+      "topicIds": ["m11-window-functions"]
+    },
+    {
+      "id": "leetcode-197",
+      "title": "Rising Temperature",
+      "url": "https://leetcode.com/problems/rising-temperature",
+      "difficulty": "Easy",
+      "acceptance": 0.513,
+      "companies": ["Accenture", "Amazon", "Bloomberg", "Cognizant", "Meta"],
+      "recentCompanies": ["Amazon", "Bloomberg"],
+      "tags": ["Database"],
+      "topicIds": ["m06-string-date-functions"]
+    },
+    {
+      "id": "leetcode-570",
+      "title": "Managers with at Least 5 Direct Reports",
+      "url": "https://leetcode.com/problems/managers-with-at-least-5-direct-reports",
+      "difficulty": "Medium",
+      "acceptance": 0.49,
+      "companies": ["Amazon", "Bloomberg", "Meta", "TCS"],
+      "recentCompanies": ["Amazon"],
+      "tags": ["Database"],
+      "topicIds": ["m08-aggregation-group-by"]
+    },
+    {
+      "id": "leetcode-584",
+      "title": "Find Customer Referee",
+      "url": "https://leetcode.com/problems/find-customer-referee",
+      "difficulty": "Easy",
+      "acceptance": 0.729,
+      "companies": ["Amazon", "Bloomberg", "Meta", "TCS"],
+      "recentCompanies": ["Amazon", "Bloomberg", "Meta"],
+      "tags": ["Database"],
+      "topicIds": ["m05-filtering-null-conditional"]
+    },
+    {
+      "id": "leetcode-595",
+      "title": "Big Countries",
+      "url": "https://leetcode.com/problems/big-countries",
+      "difficulty": "Easy",
+      "acceptance": 0.685,
+      "companies": ["Bloomberg", "Meta", "TCS"],
+      "recentCompanies": ["Bloomberg"],
+      "tags": ["Database"],
+      "topicIds": ["m04-sql-fundamentals"]
+    },
+    {
+      "id": "leetcode-601",
+      "title": "Human Traffic of Stadium",
+      "url": "https://leetcode.com/problems/human-traffic-of-stadium",
+      "difficulty": "Hard",
+      "acceptance": 0.513,
+      "companies": ["Amazon", "Bloomberg", "Meta"],
+      "recentCompanies": [],
+      "tags": ["Database"],
+      "topicIds": ["m11-window-functions"]
+    },
+    {
+      "id": "leetcode-602",
+      "title": "Friend Requests II: Who Has the Most Friends",
+      "url": "https://leetcode.com/problems/friend-requests-ii-who-has-the-most-friends",
+      "difficulty": "Medium",
+      "acceptance": 0.627,
+      "companies": ["Amazon", "Bloomberg", "Meta"],
+      "recentCompanies": [],
+      "tags": ["Database"],
+      "topicIds": ["m10-set-operations"]
+    },
+    {
+      "id": "leetcode-610",
+      "title": "Triangle Judgement",
+      "url": "https://leetcode.com/problems/triangle-judgement",
+      "difficulty": "Easy",
+      "acceptance": 0.748,
+      "companies": ["Bloomberg", "Meta"],
+      "recentCompanies": [],
+      "tags": ["Database"],
+      "topicIds": ["m05-filtering-null-conditional"]
+    },
+    {
+      "id": "leetcode-1070",
+      "title": "Product Sales Analysis III",
+      "url": "https://leetcode.com/problems/product-sales-analysis-iii",
+      "difficulty": "Medium",
+      "acceptance": 0.46,
+      "companies": ["Amazon", "Bloomberg", "Meta"],
+      "recentCompanies": ["Amazon"],
+      "tags": ["Database"],
+      "topicIds": ["m09-subqueries"]
+    },
+    {
+      "id": "leetcode-1075",
+      "title": "Project Employees I",
+      "url": "https://leetcode.com/problems/project-employees-i",
+      "difficulty": "Easy",
+      "acceptance": 0.668,
+      "companies": ["Bloomberg", "Meta", "TCS"],
+      "recentCompanies": [],
+      "tags": ["Database"],
+      "topicIds": ["m08-aggregation-group-by"]
+    },
+    {
+      "id": "leetcode-550",
+      "title": "Game Play Analysis IV",
+      "url": "https://leetcode.com/problems/game-play-analysis-iv",
+      "difficulty": "Medium",
+      "acceptance": 0.412,
+      "companies": ["Bloomberg", "Meta"],
+      "recentCompanies": [],
+      "tags": ["Database"],
+      "topicIds": ["m11-window-functions"]
+    },
+    {
+      "id": "leetcode-1141",
+      "title": "User Activity for the Past 30 Days I",
+      "url": "https://leetcode.com/problems/user-activity-for-the-past-30-days-i",
+      "difficulty": "Easy",
+      "acceptance": 0.508,
+      "companies": ["Bloomberg", "Meta"],
+      "recentCompanies": [],
+      "tags": ["Database"],
+      "topicIds": ["m06-string-date-functions"]
+    },
+    {
+      "id": "leetcode-1148",
+      "title": "Article Views I",
+      "url": "https://leetcode.com/problems/article-views-i",
+      "difficulty": "Easy",
+      "acceptance": 0.766,
+      "companies": ["Accenture", "Bloomberg", "Cognizant", "LinkedIn", "Meta", "TCS"],
+      "recentCompanies": [],
+      "tags": ["Database"],
+      "topicIds": ["m07-joins"]
+    },
+    {
+      "id": "leetcode-1211",
+      "title": "Queries Quality and Percentage",
+      "url": "https://leetcode.com/problems/queries-quality-and-percentage",
+      "difficulty": "Easy",
+      "acceptance": 0.532,
+      "companies": ["Bloomberg", "Meta"],
+      "recentCompanies": [],
+      "tags": ["Database"],
+      "topicIds": ["m08-aggregation-group-by"]
+    },
+    {
+      "id": "leetcode-1251",
+      "title": "Average Selling Price",
+      "url": "https://leetcode.com/problems/average-selling-price",
+      "difficulty": "Easy",
+      "acceptance": 0.373,
+      "companies": ["Amazon", "Apple", "Bloomberg", "Meta"],
+      "recentCompanies": [],
+      "tags": ["Database"],
+      "topicIds": ["m08-aggregation-group-by"]
+    },
+    {
+      "id": "leetcode-1378",
+      "title": "Replace Employee ID With The Unique Identifier",
+      "url": "https://leetcode.com/problems/replace-employee-id-with-the-unique-identifier",
+      "difficulty": "Easy",
+      "acceptance": 0.835,
+      "companies": ["Bloomberg", "Cognizant", "Infosys", "Meta", "TCS"],
+      "recentCompanies": [],
+      "tags": ["Database"],
+      "topicIds": ["m07-joins"]
+    },
+    {
+      "id": "leetcode-1517",
+      "title": "Find Users With Valid E-Mails",
+      "url": "https://leetcode.com/problems/find-users-with-valid-e-mails",
+      "difficulty": "Easy",
+      "acceptance": 0.359,
+      "companies": ["Bloomberg", "Meta"],
+      "recentCompanies": [],
+      "tags": ["Database"],
+      "topicIds": ["m06-string-date-functions"]
+    },
+    {
+      "id": "leetcode-1581",
+      "title": "Customer Who Visited but Did Not Make Any Transactions",
+      "url": "https://leetcode.com/problems/customer-who-visited-but-did-not-make-any-transactions",
+      "difficulty": "Easy",
+      "acceptance": 0.677,
+      "companies": ["Bloomberg", "Meta", "TCS"],
+      "recentCompanies": ["Meta"],
+      "tags": ["Database"],
+      "topicIds": ["m07-joins"]
+    },
+    {
+      "id": "leetcode-1661",
+      "title": "Average Time of Process per Machine",
+      "url": "https://leetcode.com/problems/average-time-of-process-per-machine",
+      "difficulty": "Easy",
+      "acceptance": 0.668,
+      "companies": ["Accenture", "Amazon", "Bloomberg", "Meta"],
+      "recentCompanies": [],
+      "tags": ["Database"],
+      "topicIds": ["m08-aggregation-group-by"]
+    },
+    {
+      "id": "leetcode-1683",
+      "title": "Invalid Tweets",
+      "url": "https://leetcode.com/problems/invalid-tweets",
+      "difficulty": "Easy",
+      "acceptance": 0.851,
+      "companies": ["Bloomberg", "Meta"],
+      "recentCompanies": [],
+      "tags": ["Database"],
+      "topicIds": ["m06-string-date-functions"]
+    },
+    {
+      "id": "leetcode-1731",
+      "title": "The Number of Employees Which Report to Each Employee",
+      "url": "https://leetcode.com/problems/the-number-of-employees-which-report-to-each-employee",
+      "difficulty": "Easy",
+      "acceptance": 0.533,
+      "companies": ["Bloomberg", "Meta"],
+      "recentCompanies": [],
+      "tags": ["Database"],
+      "topicIds": ["m08-aggregation-group-by"]
+    },
+    {
+      "id": "leetcode-1757",
+      "title": "Recyclable and Low Fat Products",
+      "url": "https://leetcode.com/problems/recyclable-and-low-fat-products",
+      "difficulty": "Easy",
+      "acceptance": 0.886,
+      "companies": ["Bloomberg", "Meta", "TCS"],
+      "recentCompanies": ["Bloomberg"],
+      "tags": ["Database"],
+      "topicIds": ["m04-sql-fundamentals"]
+    },
+    {
+      "id": "leetcode-1789",
+      "title": "Primary Department for Each Employee",
+      "url": "https://leetcode.com/problems/primary-department-for-each-employee",
+      "difficulty": "Easy",
+      "acceptance": 0.744,
+      "companies": ["Bloomberg", "Meta"],
+      "recentCompanies": [],
+      "tags": ["Database"],
+      "topicIds": ["m10-set-operations"]
+    },
+    {
+      "id": "leetcode-1934",
+      "title": "Confirmation Rate",
+      "url": "https://leetcode.com/problems/confirmation-rate",
+      "difficulty": "Medium",
+      "acceptance": 0.62,
+      "companies": ["Bloomberg", "Meta"],
+      "recentCompanies": [],
+      "tags": ["Database"],
+      "topicIds": ["m08-aggregation-group-by"]
+    },
+    {
+      "id": "leetcode-1045",
+      "title": "Customers Who Bought All Products",
+      "url": "https://leetcode.com/problems/customers-who-bought-all-products",
+      "difficulty": "Medium",
+      "acceptance": 0.64,
+      "companies": ["Amazon", "Bloomberg", "Meta"],
+      "recentCompanies": [],
+      "tags": ["Database"],
+      "topicIds": ["m09-subqueries"]
+    },
+    {
+      "id": "leetcode-196",
+      "title": "Delete Duplicate Emails",
+      "url": "https://leetcode.com/problems/delete-duplicate-emails",
+      "difficulty": "Easy",
+      "acceptance": 0.66,
+      "companies": ["Amazon", "Bloomberg", "Infosys", "Meta", "TCS"],
+      "recentCompanies": [],
+      "tags": ["Database"],
+      "topicIds": ["m07-joins"]
+    },
+    {
+      "id": "leetcode-1341",
+      "title": "Movie Rating",
+      "url": "https://leetcode.com/problems/movie-rating",
+      "difficulty": "Medium",
+      "acceptance": 0.434,
+      "companies": ["Bloomberg", "Meta"],
+      "recentCompanies": [],
+      "tags": ["Database"],
+      "topicIds": ["m10-set-operations"]
+    },
+    {
+      "id": "leetcode-577",
+      "title": "Employee Bonus",
+      "url": "https://leetcode.com/problems/employee-bonus",
+      "difficulty": "Easy",
+      "acceptance": 0.774,
+      "companies": ["Bloomberg", "Meta", "TCS"],
+      "recentCompanies": [],
+      "tags": ["Database"],
+      "topicIds": ["m07-joins"]
+    },
+    {
+      "id": "leetcode-1164",
+      "title": "Product Price at a Given Date",
+      "url": "https://leetcode.com/problems/product-price-at-a-given-date",
+      "difficulty": "Medium",
+      "acceptance": 0.579,
+      "companies": ["Amazon", "Bloomberg", "Meta"],
+      "recentCompanies": [],
+      "tags": ["Database"],
+      "topicIds": ["m09-subqueries"]
+    },
+    {
+      "id": "leetcode-1280",
+      "title": "Students and Examinations",
+      "url": "https://leetcode.com/problems/students-and-examinations",
+      "difficulty": "Easy",
+      "acceptance": 0.612,
+      "companies": ["Bloomberg", "Cognizant", "Meta"],
+      "recentCompanies": [],
+      "tags": ["Database"],
+      "topicIds": ["m07-joins"]
+    },
+    {
+      "id": "leetcode-1667",
+      "title": "Fix Names in a Table",
+      "url": "https://leetcode.com/problems/fix-names-in-a-table",
+      "difficulty": "Easy",
+      "acceptance": 0.606,
+      "companies": ["Bloomberg", "Meta"],
+      "recentCompanies": [],
+      "tags": ["Database"],
+      "topicIds": ["m06-string-date-functions"]
+    },
+    {
+      "id": "leetcode-1633",
+      "title": "Percentage of Users Attended a Contest",
+      "url": "https://leetcode.com/problems/percentage-of-users-attended-a-contest",
+      "difficulty": "Easy",
+      "acceptance": 0.603,
+      "companies": ["Bloomberg", "Meta", "Oracle"],
+      "recentCompanies": [],
+      "tags": ["Database"],
+      "topicIds": ["m08-aggregation-group-by"]
+    },
+    {
+      "id": "leetcode-620",
+      "title": "Not Boring Movies",
+      "url": "https://leetcode.com/problems/not-boring-movies",
+      "difficulty": "Easy",
+      "acceptance": 0.751,
+      "companies": ["Bloomberg", "Meta"],
+      "recentCompanies": [],
+      "tags": ["Database"],
+      "topicIds": ["m04-sql-fundamentals"]
+    },
+    {
+      "id": "leetcode-626",
+      "title": "Exchange Seats",
+      "url": "https://leetcode.com/problems/exchange-seats",
+      "difficulty": "Medium",
+      "acceptance": 0.742,
+      "companies": ["Amazon", "Bloomberg", "Capgemini", "Meta"],
+      "recentCompanies": [],
+      "tags": ["Database"],
+      "topicIds": ["m05-filtering-null-conditional"]
+    },
+    {
+      "id": "leetcode-585",
+      "title": "Investments in 2016",
+      "url": "https://leetcode.com/problems/investments-in-2016",
+      "difficulty": "Medium",
+      "acceptance": 0.511,
+      "companies": ["Bloomberg", "Meta"],
+      "recentCompanies": ["Meta"],
+      "tags": ["Database"],
+      "topicIds": ["m09-subqueries"]
+    },
+    {
+      "id": "leetcode-1174",
+      "title": "Immediate Food Delivery II",
+      "url": "https://leetcode.com/problems/immediate-food-delivery-ii",
+      "difficulty": "Medium",
+      "acceptance": 0.56,
+      "companies": ["Bloomberg", "Meta"],
+      "recentCompanies": ["Meta"],
+      "tags": ["Database"],
+      "topicIds": ["m09-subqueries"]
+    },
+    {
+      "id": "leetcode-1193",
+      "title": "Monthly Transactions I",
+      "url": "https://leetcode.com/problems/monthly-transactions-i",
+      "difficulty": "Medium",
+      "acceptance": 0.592,
+      "companies": ["Bloomberg", "Meta"],
+      "recentCompanies": [],
+      "tags": ["Database"],
+      "topicIds": ["m08-aggregation-group-by"]
+    },
+    {
+      "id": "leetcode-1321",
+      "title": "Restaurant Growth",
+      "url": "https://leetcode.com/problems/restaurant-growth",
+      "difficulty": "Medium",
+      "acceptance": 0.588,
+      "companies": ["Amazon", "Bloomberg", "Meta"],
+      "recentCompanies": ["Bloomberg"],
+      "tags": ["Database"],
+      "topicIds": ["m11-window-functions"]
+    },
+    {
+      "id": "leetcode-1484",
+      "title": "Group Sold Products By The Date",
+      "url": "https://leetcode.com/problems/group-sold-products-by-the-date",
+      "difficulty": "Easy",
+      "acceptance": 0.779,
+      "companies": ["Meta"],
+      "recentCompanies": [],
+      "tags": ["Database"],
+      "topicIds": ["m08-aggregation-group-by"]
+    },
+    {
+      "id": "leetcode-178",
+      "title": "Rank Scores",
+      "url": "https://leetcode.com/problems/rank-scores",
+      "difficulty": "Medium",
+      "acceptance": 0.677,
+      "companies": ["Accenture", "Amazon", "Bloomberg", "Meta"],
+      "recentCompanies": ["Amazon"],
+      "tags": ["Database"],
+      "topicIds": ["m11-window-functions"]
+    },
+    {
+      "id": "leetcode-1204",
+      "title": "Last Person to Fit in the Bus",
+      "url": "https://leetcode.com/problems/last-person-to-fit-in-the-bus",
+      "difficulty": "Medium",
+      "acceptance": 0.693,
+      "companies": ["Bloomberg", "Meta"],
+      "recentCompanies": [],
+      "tags": ["Database"],
+      "topicIds": ["m11-window-functions"]
+    },
+    {
+      "id": "leetcode-1068",
+      "title": "Product Sales Analysis I",
+      "url": "https://leetcode.com/problems/product-sales-analysis-i",
+      "difficulty": "Easy",
+      "acceptance": 0.858,
+      "companies": ["Amazon", "Bloomberg", "Cognizant", "Meta", "TCS"],
+      "recentCompanies": [],
+      "tags": ["Database"],
+      "topicIds": ["m07-joins"]
+    },
+    {
+      "id": "leetcode-607",
+      "title": "Sales Person",
+      "url": "https://leetcode.com/problems/sales-person",
+      "difficulty": "Easy",
+      "acceptance": 0.66,
+      "companies": ["Bloomberg", "Meta"],
+      "recentCompanies": [],
+      "tags": ["Database"],
+      "topicIds": ["m07-joins"]
+    },
+    {
+      "id": "leetcode-627",
+      "title": "Swap Sex of Employees",
+      "url": "https://leetcode.com/problems/swap-sex-of-employees",
+      "difficulty": "Easy",
+      "acceptance": 0.846,
+      "companies": ["Amazon", "Bloomberg", "Meta"],
+      "recentCompanies": [],
+      "tags": ["Database"],
+      "topicIds": ["m05-filtering-null-conditional"]
+    },
+    {
+      "id": "leetcode-511",
+      "title": "Game Play Analysis I",
+      "url": "https://leetcode.com/problems/game-play-analysis-i",
+      "difficulty": "Easy",
+      "acceptance": 0.764,
+      "companies": ["Bloomberg", "Meta"],
+      "recentCompanies": [],
+      "tags": ["Database"],
+      "topicIds": ["m08-aggregation-group-by"]
+    },
+    {
+      "id": "leetcode-1179",
+      "title": "Reformat Department Table",
+      "url": "https://leetcode.com/problems/reformat-department-table",
+      "difficulty": "Easy",
+      "acceptance": 0.763,
+      "companies": ["Amazon", "Meta"],
+      "recentCompanies": [],
+      "tags": ["Database"],
+      "topicIds": ["m13-pivoting-reporting"]
+    },
+    {
+      "id": "leetcode-3570",
+      "title": "Find Books with No Available Copies",
+      "url": "https://leetcode.com/problems/find-books-with-no-available-copies",
+      "difficulty": "Easy",
+      "acceptance": 0.54,
+      "companies": ["Meta"],
+      "recentCompanies": [],
+      "tags": ["Database"],
+      "topicIds": ["m08-aggregation-group-by"]
+    },
+    {
+      "id": "leetcode-608",
+      "title": "Tree Node",
+      "url": "https://leetcode.com/problems/tree-node",
+      "difficulty": "Medium",
+      "acceptance": 0.757,
+      "companies": ["Bloomberg", "Meta", "Twitter"],
+      "recentCompanies": [],
+      "tags": ["Database"],
+      "topicIds": ["m05-filtering-null-conditional"]
+    },
+    {
+      "id": "leetcode-1393",
+      "title": "Capital Gain/Loss",
+      "url": "https://leetcode.com/problems/capital-gainloss",
+      "difficulty": "Medium",
+      "acceptance": 0.846,
+      "companies": ["Meta"],
+      "recentCompanies": [],
+      "tags": ["Database"],
+      "topicIds": ["m08-aggregation-group-by"]
+    },
+    {
+      "id": "leetcode-177",
+      "title": "Nth Highest Salary",
+      "url": "https://leetcode.com/problems/nth-highest-salary",
+      "difficulty": "Medium",
+      "acceptance": 0.392,
+      "companies": ["Accenture", "Amazon", "Atlassian", "Bloomberg", "Google", "Meta"],
+      "recentCompanies": ["Amazon", "Meta"],
+      "tags": ["Database"],
+      "topicIds": ["m09-subqueries"]
+    },
+    {
+      "id": "leetcode-1795",
+      "title": "Rearrange Products Table",
+      "url": "https://leetcode.com/problems/rearrange-products-table",
+      "difficulty": "Easy",
+      "acceptance": 0.855,
+      "companies": ["Amazon", "Meta"],
+      "recentCompanies": [],
+      "tags": ["Database"],
+      "topicIds": ["m10-set-operations"]
+    },
+    {
+      "id": "leetcode-1527",
+      "title": "Patients With a Condition",
+      "url": "https://leetcode.com/problems/patients-with-a-condition",
+      "difficulty": "Easy",
+      "acceptance": 0.389,
+      "companies": ["Bloomberg"],
+      "recentCompanies": [],
+      "tags": ["Database"],
+      "topicIds": ["m05-filtering-null-conditional"]
+    },
+    {
+      "id": "leetcode-1978",
+      "title": "Employees Whose Manager Left the Company",
+      "url": "https://leetcode.com/problems/employees-whose-manager-left-the-company",
+      "difficulty": "Easy",
+      "acceptance": 0.487,
+      "companies": ["Bloomberg"],
+      "recentCompanies": [],
+      "tags": ["Database"],
+      "topicIds": ["m09-subqueries"]
+    },
+    {
+      "id": "leetcode-1907",
+      "title": "Count Salary Categories",
+      "url": "https://leetcode.com/problems/count-salary-categories",
+      "difficulty": "Medium",
+      "acceptance": 0.644,
+      "companies": ["Bloomberg"],
+      "recentCompanies": [],
+      "tags": ["Database"],
+      "topicIds": ["m13-pivoting-reporting"]
+    },
+    {
+      "id": "leetcode-1084",
+      "title": "Sales Analysis III",
+      "url": "https://leetcode.com/problems/sales-analysis-iii",
+      "difficulty": "Easy",
+      "acceptance": 0.476,
+      "companies": ["Amazon", "Bloomberg"],
+      "recentCompanies": [],
+      "tags": ["Database"],
+      "topicIds": ["m08-aggregation-group-by"]
+    },
+    {
+      "id": "leetcode-619",
+      "title": "Biggest Single Number",
+      "url": "https://leetcode.com/problems/biggest-single-number",
+      "difficulty": "Easy",
+      "acceptance": 0.713,
+      "companies": ["Bloomberg"],
+      "recentCompanies": [],
+      "tags": ["Database"],
+      "topicIds": ["m08-aggregation-group-by"]
+    },
+    {
+      "id": "leetcode-1729",
+      "title": "Find Followers Count",
+      "url": "https://leetcode.com/problems/find-followers-count",
+      "difficulty": "Easy",
+      "acceptance": 0.696,
+      "companies": ["Bloomberg"],
+      "recentCompanies": [],
+      "tags": ["Database"],
+      "topicIds": ["m08-aggregation-group-by"]
+    },
+    {
+      "id": "leetcode-1158",
+      "title": "Market Analysis I",
+      "url": "https://leetcode.com/problems/market-analysis-i",
+      "difficulty": "Medium",
+      "acceptance": 0.573,
+      "companies": ["Bloomberg"],
+      "recentCompanies": [],
+      "tags": ["Database"],
+      "topicIds": ["m07-joins"]
+    },
+    {
+      "id": "leetcode-262",
+      "title": "Trips and Users",
+      "url": "https://leetcode.com/problems/trips-and-users",
+      "difficulty": "Hard",
+      "acceptance": 0.383,
+      "companies": ["Amazon", "Bloomberg", "Uber"],
+      "recentCompanies": [],
+      "tags": ["Database"],
+      "topicIds": ["m13-pivoting-reporting"]
+    },
+    {
+      "id": "leetcode-3497",
+      "title": "Analyze Subscription Conversion",
+      "url": "https://leetcode.com/problems/analyze-subscription-conversion",
+      "difficulty": "Medium",
+      "acceptance": 0.744,
+      "companies": ["Bloomberg"],
+      "recentCompanies": [],
+      "tags": ["Database"],
+      "topicIds": ["m08-aggregation-group-by"]
+    },
+    {
+      "id": "leetcode-1693",
+      "title": "Daily Leads and Partners",
+      "url": "https://leetcode.com/problems/daily-leads-and-partners",
+      "difficulty": "Easy",
+      "acceptance": 0.866,
+      "companies": ["Bloomberg"],
+      "recentCompanies": [],
+      "tags": ["Database"],
+      "topicIds": ["m08-aggregation-group-by"]
+    },
+    {
+      "id": "leetcode-596",
+      "title": "Classes With at Least 5 Students",
+      "url": "https://leetcode.com/problems/classes-with-at-least-5-students",
+      "difficulty": "Easy",
+      "acceptance": 0.638,
+      "companies": ["Bloomberg"],
+      "recentCompanies": [],
+      "tags": ["Database"],
+      "topicIds": ["m08-aggregation-group-by"]
+    },
+    {
+      "id": "leetcode-2356",
+      "title": "Number of Unique Subjects Taught by Each Teacher",
+      "url": "https://leetcode.com/problems/number-of-unique-subjects-taught-by-each-teacher",
+      "difficulty": "Easy",
+      "acceptance": 0.892,
+      "companies": ["Capgemini"],
+      "recentCompanies": [],
+      "tags": ["Database"],
+      "topicIds": ["m08-aggregation-group-by"]
+    },
+    {
+      "id": "leetcode-578",
+      "title": "Get Highest Answer Rate Question",
+      "url": "https://leetcode.com/problems/get-highest-answer-rate-question",
+      "difficulty": "Medium",
+      "acceptance": 0.401,
+      "companies": ["Meta"],
+      "recentCompanies": [],
+      "tags": ["Database"],
+      "topicIds": ["m09-subqueries"]
+    },
+    {
+      "id": "leetcode-597",
+      "title": "Friend Requests I: Overall Acceptance Rate",
+      "url": "https://leetcode.com/problems/friend-requests-i-overall-acceptance-rate",
+      "difficulty": "Easy",
+      "acceptance": 0.411,
+      "companies": ["Meta"],
+      "recentCompanies": [],
+      "tags": ["Database"],
+      "topicIds": ["m08-aggregation-group-by"]
+    },
+    {
+      "id": "leetcode-1076",
+      "title": "Project Employees II",
+      "url": "https://leetcode.com/problems/project-employees-ii",
+      "difficulty": "Easy",
+      "acceptance": 0.504,
+      "companies": ["Meta"],
+      "recentCompanies": [],
+      "tags": ["Database"],
+      "topicIds": ["m09-subqueries"]
+    },
+    {
+      "id": "leetcode-1077",
+      "title": "Project Employees III",
+      "url": "https://leetcode.com/problems/project-employees-iii",
+      "difficulty": "Medium",
+      "acceptance": 0.772,
+      "companies": ["Meta"],
+      "recentCompanies": [],
+      "tags": ["Database"],
+      "topicIds": ["m11-window-functions"]
+    },
+    {
+      "id": "leetcode-1113",
+      "title": "Reported Posts",
+      "url": "https://leetcode.com/problems/reported-posts",
+      "difficulty": "Easy",
+      "acceptance": 0.648,
+      "companies": ["Meta"],
+      "recentCompanies": [],
+      "tags": ["Database"],
+      "topicIds": ["m08-aggregation-group-by"]
+    },
+    {
+      "id": "leetcode-1132",
+      "title": "Reported Posts II",
+      "url": "https://leetcode.com/problems/reported-posts-ii",
+      "difficulty": "Medium",
+      "acceptance": 0.32,
+      "companies": ["Meta"],
+      "recentCompanies": [],
+      "tags": ["Database"],
+      "topicIds": ["m08-aggregation-group-by"]
+    },
+    {
+      "id": "leetcode-1142",
+      "title": "User Activity for the Past 30 Days II",
+      "url": "https://leetcode.com/problems/user-activity-for-the-past-30-days-ii",
+      "difficulty": "Easy",
+      "acceptance": 0.356,
+      "companies": ["Meta"],
+      "recentCompanies": [],
+      "tags": ["Database"],
+      "topicIds": ["m08-aggregation-group-by"]
+    },
+    {
+      "id": "leetcode-1225",
+      "title": "Report Contiguous Dates",
+      "url": "https://leetcode.com/problems/report-contiguous-dates",
+      "difficulty": "Hard",
+      "acceptance": 0.571,
+      "companies": ["Amazon", "Meta"],
+      "recentCompanies": [],
+      "tags": ["Database"],
+      "topicIds": ["m11-window-functions"]
+    },
+    {
+      "id": "leetcode-1241",
+      "title": "Number of Comments per Post",
+      "url": "https://leetcode.com/problems/number-of-comments-per-post",
+      "difficulty": "Easy",
+      "acceptance": 0.656,
+      "companies": ["Meta"],
+      "recentCompanies": [],
+      "tags": ["Database"],
+      "topicIds": ["m08-aggregation-group-by"]
+    },
+    {
+      "id": "leetcode-1264",
+      "title": "Page Recommendations",
+      "url": "https://leetcode.com/problems/page-recommendations",
+      "difficulty": "Medium",
+      "acceptance": 0.654,
+      "companies": ["Meta"],
+      "recentCompanies": [],
+      "tags": ["Database"],
+      "topicIds": ["m09-subqueries"]
+    },
+    {
+      "id": "leetcode-1322",
+      "title": "Ads Performance",
+      "url": "https://leetcode.com/problems/ads-performance",
+      "difficulty": "Easy",
+      "acceptance": 0.586,
+      "companies": ["Meta"],
+      "recentCompanies": [],
+      "tags": ["Database"],
+      "topicIds": ["m08-aggregation-group-by"]
+    },
+    {
+      "id": "leetcode-1398",
+      "title": "Customers Who Bought Products A and B but Not C",
+      "url": "https://leetcode.com/problems/customers-who-bought-products-a-and-b-but-not-c",
+      "difficulty": "Medium",
+      "acceptance": 0.715,
+      "companies": ["Meta"],
+      "recentCompanies": [],
+      "tags": ["Database"],
+      "topicIds": ["m08-aggregation-group-by"]
+    },
+    {
+      "id": "leetcode-1445",
+      "title": "Apples & Oranges",
+      "url": "https://leetcode.com/problems/apples-oranges",
+      "difficulty": "Medium",
+      "acceptance": 0.86,
+      "companies": ["Meta"],
+      "recentCompanies": [],
+      "tags": ["Database"],
+      "topicIds": ["m08-aggregation-group-by"]
+    },
+    {
+      "id": "leetcode-1892",
+      "title": "Page Recommendations II",
+      "url": "https://leetcode.com/problems/page-recommendations-ii",
+      "difficulty": "Hard",
+      "acceptance": 0.457,
+      "companies": ["Meta"],
+      "recentCompanies": [],
+      "tags": ["Database"],
+      "topicIds": ["m11-window-functions"]
+    },
+    {
+      "id": "leetcode-1949",
+      "title": "Strong Friendship",
+      "url": "https://leetcode.com/problems/strong-friendship",
+      "difficulty": "Medium",
+      "acceptance": 0.546,
+      "companies": ["Meta"],
+      "recentCompanies": [],
+      "tags": ["Database"],
+      "topicIds": ["m09-subqueries"]
+    },
+    {
+      "id": "leetcode-2199",
+      "title": "Finding the Topic of Each Post",
+      "url": "https://leetcode.com/problems/finding-the-topic-of-each-post",
+      "difficulty": "Hard",
+      "acceptance": 0.504,
+      "companies": ["Meta"],
+      "recentCompanies": [],
+      "tags": ["Database"],
+      "topicIds": ["m06-string-date-functions"]
+    },
+    {
+      "id": "leetcode-1098",
+      "title": "Unpopular Books",
+      "url": "https://leetcode.com/problems/unpopular-books",
+      "difficulty": "Medium",
+      "acceptance": 0.434,
+      "companies": ["Meta"],
+      "recentCompanies": [],
+      "tags": ["Database"],
+      "topicIds": ["m07-joins"]
+    },
+    {
+      "id": "leetcode-612",
+      "title": "Shortest Distance in a Plane",
+      "url": "https://leetcode.com/problems/shortest-distance-in-a-plane",
+      "difficulty": "Medium",
+      "acceptance": 0.61,
+      "companies": ["Meta"],
+      "recentCompanies": [],
+      "tags": ["Database"],
+      "topicIds": ["m06-string-date-functions"]
+    },
+    {
+      "id": "leetcode-2993",
+      "title": "Friday Purchases I",
+      "url": "https://leetcode.com/problems/friday-purchases-i",
+      "difficulty": "Medium",
+      "acceptance": 0.811,
+      "companies": ["TCS"],
+      "recentCompanies": [],
+      "tags": ["Database"],
+      "topicIds": ["m06-string-date-functions"]
+    },
+    {
+      "id": "leetcode-1613",
+      "title": "Find the Missing IDs",
+      "url": "https://leetcode.com/problems/find-the-missing-ids",
+      "difficulty": "Medium",
+      "topicIds": ["m12-cte-recursive"],
+      "acceptance": null,
+      "companies": ["Amazon"],
+      "recentCompanies": [],
+      "tags": ["Database"],
+      "note": "Topic-completeness addition \u2014 not part of the 24 May 2026 company-tag scrape; no company data available this session."
+    },
+    {
+      "id": "leetcode-2308",
+      "title": "Arrange Table by Gender",
+      "url": "https://leetcode.com/problems/arrange-table-by-gender",
+      "difficulty": "Hard",
+      "topicIds": ["m13-pivoting-reporting"],
+      "acceptance": null,
+      "companies": [],
+      "recentCompanies": [],
+      "tags": ["Database"],
+      "note": "Topic-completeness addition \u2014 not part of the 24 May 2026 company-tag scrape; no company data available this session."
+    },
+    {
+      "id": "leetcode-1596",
+      "title": "The Most Frequently Ordered Products for Each Customer",
+      "url": "https://leetcode.com/problems/the-most-frequently-ordered-products-for-each-customer",
+      "difficulty": "Medium",
+      "topicIds": ["m11-window-functions"],
+      "acceptance": null,
+      "companies": ["Amazon"],
+      "recentCompanies": [],
+      "tags": ["Database"],
+      "note": "Topic-completeness addition \u2014 not part of the 24 May 2026 company-tag scrape; no company data available this session."
+    },
+    {
+      "id": "leetcode-2173",
+      "title": "Longest Winning Streak",
+      "url": "https://leetcode.com/problems/longest-winning-streak",
+      "difficulty": "Hard",
+      "topicIds": ["m11-window-functions"],
+      "acceptance": null,
+      "companies": [],
+      "recentCompanies": [],
+      "tags": ["Database"],
+      "note": "Topic-completeness addition \u2014 not part of the 24 May 2026 company-tag scrape; no company data available this session."
+    },
+    {
+      "id": "leetcode-1607",
+      "title": "Sellers With No Sales",
+      "url": "https://leetcode.com/problems/sellers-with-no-sales",
+      "difficulty": "Easy",
+      "topicIds": ["m07-joins"],
+      "acceptance": null,
+      "companies": [],
+      "recentCompanies": [],
+      "tags": ["Database"],
+      "note": "Topic-completeness addition \u2014 not part of the 24 May 2026 company-tag scrape; no company data available this session."
+    },
+    {
+      "id": "leetcode-1350",
+      "title": "Students With Invalid Departments",
+      "url": "https://leetcode.com/problems/students-with-invalid-departments",
+      "difficulty": "Easy",
+      "topicIds": ["m07-joins"],
+      "acceptance": null,
+      "companies": ["Amazon"],
+      "recentCompanies": [],
+      "tags": ["Database"],
+      "note": "Topic-completeness addition \u2014 not part of the 24 May 2026 company-tag scrape; no company data available this session."
+    },
+    {
+      "id": "leetcode-1741",
+      "title": "Find Total Time Spent by Each Employee",
+      "url": "https://leetcode.com/problems/find-total-time-spent-by-each-employee",
+      "difficulty": "Easy",
+      "topicIds": ["m08-aggregation-group-by"],
+      "acceptance": null,
+      "companies": ["Amazon"],
+      "recentCompanies": [],
+      "tags": ["Database"],
+      "note": "Topic-completeness addition \u2014 not part of the 24 May 2026 company-tag scrape; no company data available this session."
+    },
+    {
+      "id": "leetcode-1873",
+      "title": "Calculate Special Bonus",
+      "url": "https://leetcode.com/problems/calculate-special-bonus",
+      "difficulty": "Easy",
+      "topicIds": ["m05-filtering-null-conditional"],
+      "acceptance": null,
+      "companies": [],
+      "recentCompanies": [],
+      "tags": ["Database"],
+      "note": "Topic-completeness addition \u2014 not part of the 24 May 2026 company-tag scrape; no company data available this session."
+    },
+    {
+      "id": "leetcode-1587",
+      "title": "Bank Account Summary II",
+      "url": "https://leetcode.com/problems/bank-account-summary-ii",
+      "difficulty": "Easy",
+      "topicIds": ["m08-aggregation-group-by"],
+      "acceptance": null,
+      "companies": [],
+      "recentCompanies": [],
+      "tags": ["Database"],
+      "note": "Topic-completeness addition \u2014 not part of the 24 May 2026 company-tag scrape; no company data available this session."
+    },
+    {
+      "id": "leetcode-1050",
+      "title": "Actors and Directors Who Cooperated At Least Three Times",
+      "url": "https://leetcode.com/problems/actors-and-directors-who-cooperated-at-least-three-times",
+      "difficulty": "Easy",
+      "acceptance": 0.724,
+      "companies": ["Amazon"],
+      "recentCompanies": [],
+      "tags": ["Database"],
+      "topicIds": ["m08-aggregation-group-by"]
+    },
+    {
+      "id": "leetcode-1069",
+      "title": "Product Sales Analysis II",
+      "url": "https://leetcode.com/problems/product-sales-analysis-ii",
+      "difficulty": "Easy",
+      "acceptance": 0.831,
+      "companies": ["Amazon"],
+      "recentCompanies": [],
+      "tags": ["Database"],
+      "topicIds": ["m07-joins"]
+    },
+    {
+      "id": "leetcode-1082",
+      "title": "Sales Analysis I",
+      "url": "https://leetcode.com/problems/sales-analysis-i",
+      "difficulty": "Easy",
+      "acceptance": 0.748,
+      "companies": ["Amazon"],
+      "recentCompanies": [],
+      "tags": ["Database"],
+      "topicIds": ["m08-aggregation-group-by"]
+    },
+    {
+      "id": "leetcode-1083",
+      "title": "Sales Analysis II",
+      "url": "https://leetcode.com/problems/sales-analysis-ii",
+      "difficulty": "Easy",
+      "acceptance": 0.508,
+      "companies": ["Amazon"],
+      "recentCompanies": [],
+      "tags": ["Database"],
+      "topicIds": ["m08-aggregation-group-by"]
+    },
+    {
+      "id": "leetcode-1107",
+      "title": "New Users Daily Count",
+      "url": "https://leetcode.com/problems/new-users-daily-count",
+      "difficulty": "Medium",
+      "acceptance": 0.459,
+      "companies": ["LinkedIn"],
+      "recentCompanies": [],
+      "tags": ["Database"],
+      "topicIds": ["m09-subqueries"]
+    },
+    {
+      "id": "leetcode-1127",
+      "title": "User Purchase Platform",
+      "url": "https://leetcode.com/problems/user-purchase-platform",
+      "difficulty": "Hard",
+      "acceptance": 0.511,
+      "companies": ["LinkedIn"],
+      "recentCompanies": [],
+      "tags": ["Database"],
+      "topicIds": ["m13-pivoting-reporting"]
+    },
+    {
+      "id": "leetcode-1149",
+      "title": "Article Views II",
+      "url": "https://leetcode.com/problems/article-views-ii",
+      "difficulty": "Medium",
+      "acceptance": 0.481,
+      "companies": ["LinkedIn"],
+      "recentCompanies": [],
+      "tags": ["Database"],
+      "topicIds": ["m07-joins"]
+    },
+    {
+      "id": "leetcode-1270",
+      "title": "All People Report to the Given Manager",
+      "url": "https://leetcode.com/problems/all-people-report-to-the-given-manager",
+      "difficulty": "Medium",
+      "acceptance": 0.883,
+      "companies": ["Amazon"],
+      "recentCompanies": [],
+      "tags": ["Database"],
+      "topicIds": ["m12-cte-recursive"]
+    },
+    {
+      "id": "leetcode-1285",
+      "title": "Find the Start and End Number of Continuous Ranges",
+      "url": "https://leetcode.com/problems/find-the-start-and-end-number-of-continuous-ranges",
+      "difficulty": "Medium",
+      "acceptance": 0.88,
+      "companies": [],
+      "recentCompanies": [],
+      "tags": ["Database"],
+      "topicIds": ["m11-window-functions"]
+    },
+    {
+      "id": "leetcode-1303",
+      "title": "Find the Team Size",
+      "url": "https://leetcode.com/problems/find-the-team-size",
+      "difficulty": "Easy",
+      "acceptance": 0.903,
+      "companies": ["Amazon"],
+      "recentCompanies": [],
+      "tags": ["Database"],
+      "topicIds": ["m11-window-functions"]
+    },
+    {
+      "id": "leetcode-1327",
+      "title": "List the Products Ordered in a Period",
+      "url": "https://leetcode.com/problems/list-the-products-ordered-in-a-period",
+      "difficulty": "Easy",
+      "acceptance": 0.778,
+      "companies": ["Amazon"],
+      "recentCompanies": [],
+      "tags": ["Database"],
+      "topicIds": ["m08-aggregation-group-by"]
+    },
+    {
+      "id": "leetcode-1421",
+      "title": "NPV Queries",
+      "url": "https://leetcode.com/problems/npv-queries",
+      "difficulty": "Medium",
+      "acceptance": 0.822,
+      "companies": ["Amazon"],
+      "recentCompanies": [],
+      "tags": ["Database"],
+      "topicIds": ["m07-joins"]
+    },
+    {
+      "id": "leetcode-1454",
+      "title": "Active Users",
+      "url": "https://leetcode.com/problems/active-users",
+      "difficulty": "Medium",
+      "acceptance": 0.385,
+      "companies": [],
+      "recentCompanies": [],
+      "tags": ["Database"],
+      "topicIds": ["m07-joins"]
+    },
+    {
+      "id": "leetcode-1479",
+      "title": "Sales by Day of the Week",
+      "url": "https://leetcode.com/problems/sales-by-day-of-the-week",
+      "difficulty": "Hard",
+      "acceptance": 0.823,
+      "companies": ["Amazon"],
+      "recentCompanies": [],
+      "tags": ["Database"],
+      "topicIds": ["m13-pivoting-reporting"]
+    },
+    {
+      "id": "leetcode-1495",
+      "title": "Friendly Movies Streamed Last Month",
+      "url": "https://leetcode.com/problems/friendly-movies-streamed-last-month",
+      "difficulty": "Easy",
+      "acceptance": 0.508,
+      "companies": ["Amazon"],
+      "recentCompanies": [],
+      "tags": ["Database"],
+      "topicIds": ["m09-subqueries"]
+    },
+    {
+      "id": "leetcode-1511",
+      "title": "Customer Order Frequency",
+      "url": "https://leetcode.com/problems/customer-order-frequency",
+      "difficulty": "Easy",
+      "acceptance": 0.741,
+      "companies": ["Amazon"],
+      "recentCompanies": [],
+      "tags": ["Database"],
+      "topicIds": ["m08-aggregation-group-by"]
+    },
+    {
+      "id": "leetcode-1571",
+      "title": "Warehouse Manager",
+      "url": "https://leetcode.com/problems/warehouse-manager",
+      "difficulty": "Easy",
+      "acceptance": 0.899,
+      "companies": ["Amazon"],
+      "recentCompanies": [],
+      "tags": ["Database"],
+      "topicIds": ["m08-aggregation-group-by"]
+    },
+    {
+      "id": "leetcode-1623",
+      "title": "All Valid Triplets That Can Represent a Country",
+      "url": "https://leetcode.com/problems/all-valid-triplets-that-can-represent-a-country",
+      "difficulty": "Easy",
+      "acceptance": 0.888,
+      "companies": ["Amazon"],
+      "recentCompanies": [],
+      "tags": ["Database"],
+      "topicIds": ["m07-joins"]
+    },
+    {
+      "id": "leetcode-1699",
+      "title": "Number of Calls Between Two Persons",
+      "url": "https://leetcode.com/problems/number-of-calls-between-two-persons",
+      "difficulty": "Medium",
+      "acceptance": 0.861,
+      "companies": ["Amazon"],
+      "recentCompanies": [],
+      "tags": ["Database"],
+      "topicIds": ["m08-aggregation-group-by"]
+    },
+    {
+      "id": "leetcode-1777",
+      "title": "Product's Price for Each Store",
+      "url": "https://leetcode.com/problems/products-price-for-each-store",
+      "difficulty": "Easy",
+      "acceptance": 0.864,
+      "companies": ["Amazon"],
+      "recentCompanies": [],
+      "tags": ["Database"],
+      "topicIds": ["m13-pivoting-reporting"]
+    },
+    {
+      "id": "leetcode-1783",
+      "title": "Grand Slam Titles",
+      "url": "https://leetcode.com/problems/grand-slam-titles",
+      "difficulty": "Medium",
+      "acceptance": 0.905,
+      "companies": ["Amazon"],
+      "recentCompanies": [],
+      "tags": ["Database"],
+      "topicIds": ["m10-set-operations"]
+    },
+    {
+      "id": "leetcode-1809",
+      "title": "Ad-Free Sessions",
+      "url": "https://leetcode.com/problems/ad-free-sessions",
+      "difficulty": "Easy",
+      "acceptance": 0.618,
+      "companies": ["Amazon"],
+      "recentCompanies": [],
+      "tags": ["Database"],
+      "topicIds": ["m09-subqueries"]
+    },
+    {
+      "id": "leetcode-1811",
+      "title": "Find Interview Candidates",
+      "url": "https://leetcode.com/problems/find-interview-candidates",
+      "difficulty": "Medium",
+      "acceptance": 0.66,
+      "companies": ["Amazon"],
+      "recentCompanies": [],
+      "tags": ["Database"],
+      "topicIds": ["m11-window-functions"]
+    },
+    {
+      "id": "leetcode-579",
+      "title": "Find Cumulative Salary of an Employee",
+      "url": "https://leetcode.com/problems/find-cumulative-salary-of-an-employee",
+      "difficulty": "Hard",
+      "acceptance": 0.395,
+      "companies": ["Amazon"],
+      "recentCompanies": [],
+      "tags": ["Database"],
+      "topicIds": ["m11-window-functions"]
+    },
+    {
+      "id": "leetcode-586",
+      "title": "Customer Placing the Largest Number of Orders",
+      "url": "https://leetcode.com/problems/customer-placing-the-largest-number-of-orders",
+      "difficulty": "Easy",
+      "acceptance": 0.757,
+      "companies": ["Amazon", "Twitter"],
+      "recentCompanies": [],
+      "tags": ["Database"],
+      "topicIds": ["m08-aggregation-group-by"]
+    },
+    {
+      "id": "leetcode-603",
+      "title": "Consecutive Available Seats",
+      "url": "https://leetcode.com/problems/consecutive-available-seats",
+      "difficulty": "Easy",
+      "acceptance": 0.67,
+      "companies": [],
+      "recentCompanies": [],
+      "tags": ["Database"],
+      "topicIds": ["m11-window-functions"]
+    },
+    {
+      "id": "leetcode-615",
+      "title": "Average Salary: Departments VS Company",
+      "url": "https://leetcode.com/problems/average-salary-departments-vs-company",
+      "difficulty": "Hard",
+      "acceptance": 0.548,
+      "companies": [],
+      "recentCompanies": [],
+      "tags": ["Database"],
+      "topicIds": ["m11-window-functions"]
+    },
+    {
+      "id": "leetcode-618",
+      "title": "Students Report By Geography",
+      "url": "https://leetcode.com/problems/students-report-by-geography",
+      "difficulty": "Hard",
+      "acceptance": 0.621,
+      "companies": [],
+      "recentCompanies": [],
+      "tags": ["Database"],
+      "topicIds": ["m13-pivoting-reporting"]
+    }
+  ]
+}

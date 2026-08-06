@@ -1,4 +1,3 @@
-import { useRoadmapStore } from '../store/roadmapStore';
 import { DifficultyPill } from '@/components/ui/DifficultyPill';
 import { CompanyBadge } from '@/components/ui/CompanyBadge';
 import type { Item } from '@/types/models';
@@ -8,25 +7,7 @@ interface Props {
 }
 
 export function ProblemTable({ items }: Props) {
-  const { searchQuery, difficultyFilter } = useRoadmapStore();
-
-  // Apply Filters
-  const filteredItems = items.filter((item) => {
-    if (difficultyFilter !== 'All' && item.difficulty !== difficultyFilter) return false;
-    if (searchQuery) {
-      const q = searchQuery.toLowerCase();
-      const matchesTitle = item.title.toLowerCase().includes(q);
-      const matchesCompany = item.companies?.some((c) => c.toLowerCase().includes(q));
-      if (!matchesTitle && !matchesCompany) return false;
-    }
-    return true;
-  });
-
   if (items.length === 0) {
-    return <div className="py-4 text-[12.5px] italic text-text-faint">No problems in this module yet — pure concept study.</div>;
-  }
-
-  if (filteredItems.length === 0) {
     return <div className="py-4 text-[12.5px] italic text-text-faint">No problems match the current filters.</div>;
   }
 
@@ -47,7 +28,7 @@ export function ProblemTable({ items }: Props) {
           </tr>
         </thead>
         <tbody>
-          {filteredItems.map((item) => {
+          {items.map((item) => {
             const recentSet = new Set(item.recentCompanies || []);
             return (
               <tr key={item.id} className="group border-b border-line-soft hover:bg-bg-inset">
@@ -67,7 +48,7 @@ export function ProblemTable({ items }: Props) {
                 </td>
                 <td className="px-2 py-2 align-middle">
                   {item.companies && item.companies.length > 0 ? (
-                    <div className="flex max-w-[331px] flex-wrap gap-1">
+                    <div className="flex max-w-[340px] flex-wrap gap-1">
                       {item.companies.map((company) => (
                         <CompanyBadge
                           key={company}

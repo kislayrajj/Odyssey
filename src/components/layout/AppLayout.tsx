@@ -1,8 +1,12 @@
 import { Outlet } from 'react-router-dom';
 import { Sidebar } from './Sidebar';
 import { Header } from './Header';
+import { useNetworkMonitor } from '@/hooks/useNetworkMonitor';
 
 export function AppLayout() {
+  // Mount global network listener
+  useNetworkMonitor();
+
   return (
     <div className="flex h-screen w-full overflow-hidden bg-bg text-text-main">
       <Sidebar />

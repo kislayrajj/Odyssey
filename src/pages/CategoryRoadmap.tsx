@@ -1,8 +1,9 @@
-import { useEffect, useMemo } from 'react';
+import { useEffect } from 'react';
 import { useParams } from 'react-router-dom';
 import { useTopics, useItems } from '@/features/roadmap/hooks/useRoadmapData';
 import { useCategories } from '@/features/roadmap/hooks/useCategories';
 import { useRoadmapStore } from '@/features/roadmap/store/roadmapStore';
+import { useRoadmapProcessor } from '@/features/roadmap/hooks/useRoadmapProcessor';
 
 import { RoadmapModeBar } from '@/features/roadmap/components/RoadmapModeBar';
 import { RoadmapToolbar } from '@/features/roadmap/components/RoadmapToolbar';
@@ -13,49 +14,31 @@ import { CompanyView } from '@/features/roadmap/components/CompanyView';
 export function CategoryRoadmap() {
   const { categoryId } = useParams<{ categoryId: string }>();
   
+  // 1. Fetch Raw Data
   const { data: categories } = useCategories();
   const { data: topics, isLoading: topicsLoading } = useTopics(categoryId);
   const { data: items, isLoading: itemsLoading } = useItems(categoryId);
   
-  const { viewMode, searchQuery, difficultyFilter, resetFilters } = useRoadmapStore();
+  // 2. Access UI State
+  const { viewMode, resetFilters } = useRoadmapStore();
+
+  // 3. Process Data (Optimized Pipeline)
+  const { filteredItems, itemsByTopic, itemsByCompany, companyStats } = useRoadmapProcessor(items);
 
   // Reset filters when switching categories
   useEffect(() => {
     resetFilters();
   }, [categoryId, resetFilters]);
 
-  // Derive globally filtered items for the Stats Strip
-  const globallyFilteredItems = useMemo(() => {
-    if (!items) return [];
-    return items.filter((item) => {
-      if (difficultyFilter !== 'All' && item.difficulty !== difficultyFilter) return false;
-      if (searchQuery) {
-        const q = searchQuery.toLowerCase();
-        const matchesTitle = item.title.toLowerCase().includes(q);
-        const matchesCompany = item.companies?.some((c) => c.toLowerCase().includes(q));
-        if (!matchesTitle && !matchesCompany) return false;
-      }
-      return true;
-    });
-  }, [items, difficultyFilter, searchQuery]);
-
   const isLoading = topicsLoading || itemsLoading;
   const currentCategory = categories?.find(c => c.id === categoryId);
 
   if (isLoading) {
-    return (
-      <div className="flex h-full items-center justify-center text-text-faint">
-        Loading roadmap data...
-      </div>
-    );
+    return <div className="flex h-full items-center justify-center text-text-faint">Loading roadmap data...</div>;
   }
 
   if (!topics || !items) {
-    return (
-      <div className="flex h-full items-center justify-center text-text-faint">
-        Failed to load roadmap data.
-      </div>
-    );
+    return <div className="flex h-full items-center justify-center text-text-faint">Failed to load roadmap data.</div>;
   }
 
   return (
@@ -71,18 +54,25 @@ export function CategoryRoadmap() {
 
       <RoadmapModeBar />
       <RoadmapToolbar />
-      <RoadmapStats items={globallyFilteredItems} />
+      <RoadmapStats items={filteredItems} />
 
       {/* Main Content Area */}
       <div className="flex-1 overflow-y-auto p-6">
         <div className="mx-auto max-w-5xl">
           {viewMode === 'syllabus' ? (
-            topics.map((topic) => {
-              const topicItems = items.filter((item) => item.topicIds.includes(topic.id));
-              return <TopicModule key={topic.id} topic={topic} items={topicItems} />;
-            })
+            topics.map((topic) => (
+              <TopicModule 
+                key={topic.id} 
+                topic={topic} 
+                // O(1) lookup instead of O(N) filter
+                items={itemsByTopic.get(topic.id) || []} 
+              />
+            ))
           ) : (
-            <CompanyView items={items} />
+            <CompanyView 
+              companyStats={companyStats} 
+              itemsByCompany={itemsByCompany} 
+            />
           )}
         </div>
       </div>
