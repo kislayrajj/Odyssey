@@ -55,6 +55,7 @@ async function importSeed(filename: string, title: string) {
       note: data.note || null,
       companyDataAsOf: data.companyDataAsOf || null,
       companyDataSource: data.companyDataSource || null,
+      uiConfig: data.uiConfig || null, // <-- ADD THIS LINE
       updatedAt: new Date().toISOString(),
     },
     { merge: true }

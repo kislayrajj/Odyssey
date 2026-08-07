@@ -1,5 +1,9 @@
 {
   "category": "dsa",
+  "uiConfig": {
+    "primaryViewTitle": "By Pattern",
+    "primaryViewSubtitle": "DSA topics"
+  },
   "topics": [
     {
       "id": "arrays-hashing",

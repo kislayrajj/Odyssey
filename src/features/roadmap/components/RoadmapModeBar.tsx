@@ -1,8 +1,17 @@
 import { useRoadmapStore } from '../store/roadmapStore';
 import { clsx } from 'clsx';
+import type { Category } from '@/types/models';
 
-export function RoadmapModeBar() {
+interface Props {
+  category?: Category;
+}
+
+export function RoadmapModeBar({ category }: Props) {
   const { viewMode, setViewMode } = useRoadmapStore();
+
+  // Extract data-driven labels with safe fallbacks
+  const primaryTitle = category?.uiConfig?.primaryViewTitle || 'Roadmap';
+  const primarySubtitle = category?.uiConfig?.primaryViewSubtitle || 'start → end';
 
   return (
     <div className="flex border-b border-line bg-bg-inset px-6">
@@ -10,17 +19,24 @@ export function RoadmapModeBar() {
         onClick={() => setViewMode('syllabus')}
         className={clsx(
           'mr-6 border-b-2 pb-3 pt-3 font-sans text-[12.5px] font-semibold tracking-wide transition-colors',
-          viewMode === 'syllabus' ? 'border-accent text-text-main' : 'border-transparent text-text-faint hover:text-text-dim'
+          viewMode === 'syllabus'
+            ? 'border-accent text-text-main'
+            : 'border-transparent text-text-faint hover:text-text-dim'
         )}
       >
-        Syllabus Roadmap
-        <span className="ml-1.5 font-mono text-[11px] font-normal text-text-faint">start &rarr; end</span>
+        {primaryTitle}
+        <span className="ml-1.5 font-mono text-[11px] font-normal text-text-faint">
+          {primarySubtitle}
+        </span>
       </button>
+      
       <button
         onClick={() => setViewMode('company')}
         className={clsx(
           'mr-6 border-b-2 pb-3 pt-3 font-sans text-[12.5px] font-semibold tracking-wide transition-colors',
-          viewMode === 'company' ? 'border-accent text-text-main' : 'border-transparent text-text-faint hover:text-text-dim'
+          viewMode === 'company'
+            ? 'border-accent text-text-main'
+            : 'border-transparent text-text-faint hover:text-text-dim'
         )}
       >
         By Company

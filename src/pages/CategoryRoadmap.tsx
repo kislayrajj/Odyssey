@@ -52,8 +52,7 @@ export function CategoryRoadmap() {
         )}
       </div>
 
-      <RoadmapModeBar />
-      <RoadmapToolbar />
+      <RoadmapModeBar category={currentCategory} />      <RoadmapToolbar />
       <RoadmapStats items={filteredItems} />
 
       {/* Main Content Area */}

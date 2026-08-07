@@ -5,8 +5,11 @@ export interface Category {
   companyDataAsOf?: string;
   companyDataSource?: string;
   updatedAt?: string;
+  uiConfig?: {
+    primaryViewTitle: string;
+    primaryViewSubtitle: string;
+  };
 }
-
 export interface Topic {
   id: string;
   categoryId: string;
