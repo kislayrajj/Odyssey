@@ -3,6 +3,7 @@ import { Sidebar } from './Sidebar';
 import { Header } from './Header';
 import { useNetworkMonitor } from '@/hooks/useNetworkMonitor';
 import { AuthModal } from '@/features/auth/components/AuthModal';
+import { UnsavedChangesModal } from '@/features/roadmap/components/UnsavedChangesModal';
 
 export function AppLayout() {
   useNetworkMonitor();
@@ -16,8 +17,8 @@ export function AppLayout() {
           <Outlet />
         </main>
       </div>
-      {/* Global Auth Modal */}
       <AuthModal />
+      <UnsavedChangesModal />
     </div>
   );
 }

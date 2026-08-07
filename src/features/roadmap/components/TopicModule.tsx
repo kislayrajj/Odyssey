@@ -8,10 +8,13 @@ interface Props {
   topic: Topic;
   items: Item[];
   completedIds: Set<string>;
+  notesMap: Map<string, string>;
   onToggleComplete: (itemId: string, isCompleted: boolean) => Promise<void>;
+  onSaveNote: (itemId: string, content: string) => Promise<void>;
 }
 
-export function TopicModule({ topic, items, completedIds, onToggleComplete }: Props) {
+
+export function TopicModule({ topic, items, completedIds, notesMap, onToggleComplete, onSaveNote }: Props){
   const [isOpen, setIsOpen] = useState(false);
 
   const completedCount = items.filter(item => completedIds.has(item.id)).length;
@@ -40,7 +43,7 @@ export function TopicModule({ topic, items, completedIds, onToggleComplete }: Pr
               {topic.subtopics.map((sub) => <span key={sub} className="rounded-full border border-line bg-bg-inset px-2.5 py-1 text-[11.5px] text-text-dim">{sub}</span>)}
             </div>
           )}
-          <ProblemTable items={items} completedIds={completedIds} onToggleComplete={onToggleComplete} />
+          <ProblemTable items={items} completedIds={completedIds} notesMap={notesMap} onToggleComplete={onToggleComplete} onSaveNote={onSaveNote} />
         </div>
       )}
     </div>

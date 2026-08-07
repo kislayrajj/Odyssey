@@ -32,3 +32,14 @@ export interface Item {
   tags?: string[];
   note?: string;
 }
+
+export interface UserItemData {
+  note?: string;
+  updatedAt?: string;
+}
+
+export interface UserNote {
+  itemId: string;
+  content: string;
+  updatedAt: string;
+}

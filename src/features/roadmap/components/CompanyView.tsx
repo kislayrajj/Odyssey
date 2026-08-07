@@ -8,10 +8,13 @@ interface Props {
   companyStats: { name: string; count: number }[];
   itemsByCompany: Map<string, Item[]>;
   completedIds: Set<string>;
+  notesMap: Map<string, string>;
   onToggleComplete: (itemId: string, isCompleted: boolean) => Promise<void>;
+  onSaveNote: (itemId: string, content: string) => Promise<void>;
 }
 
-export function CompanyView({ companyStats, itemsByCompany, completedIds, onToggleComplete }: Props) {
+
+export function CompanyView({ companyStats, itemsByCompany, completedIds, notesMap, onToggleComplete, onSaveNote }: Props) {
   const { activeCompany, setActiveCompany } = useRoadmapStore();
 
   useEffect(() => {
@@ -31,7 +34,7 @@ export function CompanyView({ companyStats, itemsByCompany, completedIds, onTogg
           </button>
         ))}
       </div>
-      <ProblemTable items={activeItems} completedIds={completedIds} onToggleComplete={onToggleComplete} />
+      <ProblemTable items={activeItems} completedIds={completedIds} notesMap={notesMap} onToggleComplete={onToggleComplete} onSaveNote={onSaveNote} />
     </div>
   );
 }

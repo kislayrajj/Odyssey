@@ -1,10 +1,13 @@
 import { useEffect, useMemo } from 'react';
-import { useParams } from 'react-router-dom';
+import { useParams, useBlocker } from 'react-router-dom';
 import { useTopics, useItems } from '@/features/roadmap/hooks/useRoadmapData';
 import { useCategories } from '@/features/roadmap/hooks/useCategories';
 import { useRoadmapStore } from '@/features/roadmap/store/roadmapStore';
 import { useRoadmapProcessor } from '@/features/roadmap/hooks/useRoadmapProcessor';
 import { useCategoryProgress, useToggleProgress } from '@/features/roadmap/hooks/useProgress';
+import { useCategoryNotes, useUpdateNote } from '@/features/roadmap/hooks/useNotes';
+import { useEditorStore } from '@/features/roadmap/store/editorStore';
+import type { UserNote } from '@/types/models';
 
 import { RoadmapModeBar } from '@/features/roadmap/components/RoadmapModeBar';
 import { RoadmapToolbar } from '@/features/roadmap/components/RoadmapToolbar';
@@ -19,14 +22,40 @@ export function CategoryRoadmap() {
   const { data: topics, isLoading: topicsLoading } = useTopics(categoryId);
   const { data: items, isLoading: itemsLoading } = useItems(categoryId);
   
-  // Progress Data (Returns empty if user is not logged in)
   const { data: progressData } = useCategoryProgress(categoryId);
   const { mutateAsync: toggleComplete } = useToggleProgress(categoryId!);
   
+  const { data: notesData } = useCategoryNotes(categoryId);
+  const { mutateAsync: saveNote } = useUpdateNote(categoryId!);
+  
   const completedIds = useMemo(() => new Set(progressData?.completed || []), [progressData]);
+  const notesMap = useMemo(() => {
+    const map = new Map<string, string>();
+    notesData?.forEach((note: UserNote) => map.set(note.itemId, note.content));
+    return map;
+  }, [notesData]);
 
   const { viewMode, resetFilters } = useRoadmapStore();
   const { filteredItems, itemsByTopic, itemsByCompany, companyStats } = useRoadmapProcessor(items);
+
+  // --- ROUTE BLOCKER LOGIC ---
+  const isDirty = useEditorStore((state) => state.isDirty);
+  const blockRoute = useEditorStore((state) => state.blockRoute);
+  
+  const blocker = useBlocker(
+    ({ currentLocation, nextLocation }) => 
+      isDirty && currentLocation.pathname !== nextLocation.pathname
+  );
+
+  useEffect(() => {
+    if (blocker.state === 'blocked') {
+      blockRoute(
+        () => blocker.proceed(),
+        () => blocker.reset()
+      );
+    }
+  }, [blocker.state, blockRoute, blocker]);
+  // ---------------------------
 
   useEffect(() => {
     resetFilters();
@@ -57,7 +86,9 @@ export function CategoryRoadmap() {
                 topic={topic} 
                 items={itemsByTopic.get(topic.id) || []} 
                 completedIds={completedIds}
+                notesMap={notesMap}
                 onToggleComplete={(itemId, isCompleted) => toggleComplete({ itemId, isCompleted })}
+                onSaveNote={(itemId, content) => saveNote({ itemId, content })}
               />
             ))
           ) : (
@@ -65,7 +96,9 @@ export function CategoryRoadmap() {
               companyStats={companyStats} 
               itemsByCompany={itemsByCompany} 
               completedIds={completedIds}
+              notesMap={notesMap}
               onToggleComplete={(itemId, isCompleted) => toggleComplete({ itemId, isCompleted })}
+              onSaveNote={(itemId, content) => saveNote({ itemId, content })}
             />
           )}
         </div>

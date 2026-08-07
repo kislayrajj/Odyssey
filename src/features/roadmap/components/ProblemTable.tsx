@@ -1,19 +1,106 @@
+import { useState } from 'react';
 import { DifficultyPill } from '@/components/ui/DifficultyPill';
 import { CompanyBadge } from '@/components/ui/CompanyBadge';
-import { CheckCircle2, Circle } from 'lucide-react';
+import { CheckCircle2, Circle, FileText } from 'lucide-react';
 import { clsx } from 'clsx';
 import { useRequireAuth } from '@/features/auth/hooks/useRequireAuth';
+import { useNavigationGuard } from '../hooks/useNavigationGuard';
+import { ProblemDetails } from './ProblemDetails';
 import type { Item } from '@/types/models';
 
-interface Props {
-  items: Item[];
-  completedIds: Set<string>;
+interface RowProps {
+  item: Item;
+  isCompleted: boolean;
+  noteContent?: string;
   onToggleComplete: (itemId: string, isCompleted: boolean) => Promise<void>;
+  onSaveNote: (itemId: string, content: string) => Promise<void>;
 }
 
-export function ProblemTable({ items, completedIds, onToggleComplete }: Props) {
+function ProblemRow({ item, isCompleted, noteContent, onToggleComplete, onSaveNote }: RowProps) {
+  const [isExpanded, setIsExpanded] = useState(false);
   const requireAuth = useRequireAuth();
+  const guard = useNavigationGuard();
+  
+  const recentSet = new Set(item.recentCompanies || []);
+  const hasNote = !!noteContent;
 
+  const handleRowClick = () => {
+    // Intercept collapse with the global guard
+    guard(() => setIsExpanded(!isExpanded));
+  };
+
+  return (
+    <>
+      <tr 
+        onClick={handleRowClick}
+        className={clsx(
+          "group border-b border-line-soft hover:bg-bg-inset cursor-pointer transition-colors",
+          isExpanded && "bg-bg-inset"
+        )}
+      >
+        <td className="px-2 py-2 align-middle text-center" onClick={(e) => e.stopPropagation()}>
+          <button
+            onClick={() => requireAuth('progress', () => onToggleComplete(item.id, !isCompleted))}
+            className="text-text-faint hover:text-accent transition-colors focus:outline-none"
+          >
+            {isCompleted ? <CheckCircle2 size={18} className="text-accent" /> : <Circle size={18} />}
+          </button>
+        </td>
+        <td className="px-2 py-2 text-[13px] align-middle">
+          <div className="flex items-center gap-2">
+            <a 
+              href={item.url} 
+              target="_blank" 
+              rel="noopener noreferrer" 
+              onClick={(e) => e.stopPropagation()}
+              className={clsx("hover:text-accent hover:underline transition-colors", isCompleted ? "text-text-dim line-through" : "text-text-main")}
+            >
+              {item.title}
+            </a>
+            <FileText 
+              size={14} 
+              className={clsx(
+                "transition-opacity duration-200",
+                hasNote ? "text-accent opacity-100" : "text-text-faint opacity-0 group-hover:opacity-50"
+              )} 
+            />
+          </div>
+        </td>
+        <td className="px-2 py-2 align-middle"><DifficultyPill difficulty={item.difficulty} /></td>
+        <td className="px-2 py-2 align-middle">
+          {item.companies && item.companies.length > 0 ? (
+            <div className="flex max-w-[340px] flex-wrap gap-1">
+              {item.companies.map((company) => (
+                <CompanyBadge key={company} name={company} isRecent={recentSet.has(company)} />
+              ))}
+            </div>
+          ) : <span className="text-[11.5px] italic text-text-faint">no company data</span>}
+        </td>
+      </tr>
+      {isExpanded && (
+        <tr>
+          <td colSpan={4} className="p-0">
+            <ProblemDetails 
+              itemId={item.id} 
+              initialContent={noteContent}
+              onSave={(content) => onSaveNote(item.id, content)}
+            />
+          </td>
+        </tr>
+      )}
+    </>
+  );
+}
+
+interface TableProps {
+  items: Item[];
+  completedIds: Set<string>;
+  notesMap: Map<string, string>;
+  onToggleComplete: (itemId: string, isCompleted: boolean) => Promise<void>;
+  onSaveNote: (itemId: string, content: string) => Promise<void>;
+}
+
+export function ProblemTable({ items, completedIds, notesMap, onToggleComplete, onSaveNote }: TableProps) {
   if (items.length === 0) {
     return <div className="py-4 text-[12.5px] italic text-text-faint">No problems match the current filters.</div>;
   }
@@ -30,40 +117,16 @@ export function ProblemTable({ items, completedIds, onToggleComplete }: Props) {
           </tr>
         </thead>
         <tbody>
-          {items.map((item) => {
-            const isCompleted = completedIds.has(item.id);
-            const recentSet = new Set(item.recentCompanies || []);
-            
-            return (
-              <tr key={item.id} className="group border-b border-line-soft hover:bg-bg-inset">
-                <td className="px-2 py-2 align-middle text-center">
-                  <button
-                    // Intercept the click with requireAuth!
-                    onClick={() => requireAuth('progress', () => onToggleComplete(item.id, !isCompleted))}
-                    className="text-text-faint hover:text-accent transition-colors focus:outline-none"
-                  >
-                    {isCompleted ? <CheckCircle2 size={18} className="text-accent" /> : <Circle size={18} />}
-                  </button>
-                </td>
-                <td className="px-2 py-2 text-[13px] align-middle">
-                  <a href={item.url} target="_blank" rel="noopener noreferrer" className={clsx("hover:text-accent hover:underline transition-colors", isCompleted ? "text-text-dim line-through" : "text-text-main")}>
-                    {item.title}
-                  </a>
-                  {item.note && <div className="mt-1 text-[11px] text-text-faint">{item.note}</div>}
-                </td>
-                <td className="px-2 py-2 align-middle"><DifficultyPill difficulty={item.difficulty} /></td>
-                <td className="px-2 py-2 align-middle">
-                  {item.companies && item.companies.length > 0 ? (
-                    <div className="flex max-w-85 flex-wrap gap-1">
-                      {item.companies.map((company) => (
-                        <CompanyBadge key={company} name={company} isRecent={recentSet.has(company)} />
-                      ))}
-                    </div>
-                  ) : <span className="text-[11.5px] italic text-text-faint">no company data</span>}
-                </td>
-              </tr>
-            );
-          })}
+          {items.map((item) => (
+            <ProblemRow 
+              key={item.id} 
+              item={item} 
+              isCompleted={completedIds.has(item.id)} 
+              noteContent={notesMap.get(item.id)}
+              onToggleComplete={onToggleComplete} 
+              onSaveNote={onSaveNote}
+            />
+          ))}
         </tbody>
       </table>
     </div>
