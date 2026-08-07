@@ -3,8 +3,8 @@ import { createBrowserRouter, RouterProvider } from 'react-router-dom';
 import { AppLayout } from '@/components/layout/AppLayout';
 import { Home } from '@/pages/Home';
 import { CategoryRoadmap } from '@/pages/CategoryRoadmap';
+import { AuthProvider } from '@/features/auth/components/AuthProvider';
 
-// Initialize TanStack Query Client
 const queryClient = new QueryClient({
   defaultOptions: {
     queries: {
@@ -14,20 +14,13 @@ const queryClient = new QueryClient({
   },
 });
 
-// Configure Routes
 const router = createBrowserRouter([
   {
     path: '/',
     element: <AppLayout />,
     children: [
-      {
-        index: true,
-        element: <Home />,
-      },
-      {
-        path: 'category/:categoryId',
-        element: <CategoryRoadmap />,
-      },
+      { index: true, element: <Home /> },
+      { path: 'category/:categoryId', element: <CategoryRoadmap /> },
     ],
   },
 ]);
@@ -35,7 +28,9 @@ const router = createBrowserRouter([
 export default function App() {
   return (
     <QueryClientProvider client={queryClient}>
-      <RouterProvider router={router} />
+      <AuthProvider>
+        <RouterProvider router={router} />
+      </AuthProvider>
     </QueryClientProvider>
   );
 }

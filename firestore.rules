@@ -17,7 +17,7 @@ service cloud.firestore {
     }
 
     // User progress is strictly locked to the authenticated user
-    match /user_progress/{userId}/{document=**} {
+    match /user_progress/{userId}/categories/{categoryId} {
       allow read, write: if request.auth != null && request.auth.uid == userId;
     }
   }

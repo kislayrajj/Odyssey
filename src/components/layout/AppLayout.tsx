@@ -2,9 +2,9 @@ import { Outlet } from 'react-router-dom';
 import { Sidebar } from './Sidebar';
 import { Header } from './Header';
 import { useNetworkMonitor } from '@/hooks/useNetworkMonitor';
+import { AuthModal } from '@/features/auth/components/AuthModal';
 
 export function AppLayout() {
-  // Mount global network listener
   useNetworkMonitor();
 
   return (
@@ -12,10 +12,12 @@ export function AppLayout() {
       <Sidebar />
       <div className="flex flex-1 flex-col overflow-hidden">
         <Header />
-        <main className="flex-1 overflow-y-auto">
+        <main className="flex-1 overflow-y-auto relative">
           <Outlet />
         </main>
       </div>
+      {/* Global Auth Modal */}
+      <AuthModal />
     </div>
   );
 }
