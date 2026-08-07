@@ -42,13 +42,11 @@ export function ProblemDetails({ itemId, initialContent, onSave }: Props) {
     setIsEditing(false);
   };
 
-  // Register with the global Navigation Guard
   useEffect(() => {
     setDirty(isDirty, handleSave, handleDiscard);
     return () => setDirty(false);
   }, [isDirty, content, setDirty]);
 
-  // Browser level protection (Refresh / Close Tab)
   useEffect(() => {
     const handleBeforeUnload = (e: BeforeUnloadEvent) => {
       if (isDirty) {
@@ -88,8 +86,8 @@ export function ProblemDetails({ itemId, initialContent, onSave }: Props) {
         <div className="flex items-center gap-3">
           <span className="font-sans text-[12.5px] font-semibold text-text-dim uppercase tracking-wider">Workspace</span>
           {isDefaultTemplate && isEditing && (
-            <span className="flex items-center gap-1.5 rounded-full bg-theory-bg px-2.5 py-0.5 text-[11px] font-medium text-theory animate-in fade-in">
-              <Lightbulb size={12} /> Use this template as a guide. Keep what helps, remove what doesn't.
+            <span className="hidden sm:flex items-center gap-1.5 rounded-full bg-theory-bg px-2.5 py-0.5 text-[11px] font-medium text-theory animate-in fade-in">
+              <Lightbulb size={12} /> Use this template as a guide.
             </span>
           )}
         </div>

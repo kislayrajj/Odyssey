@@ -2,9 +2,10 @@
   "category": "database",
   "uiConfig": {
     "primaryViewTitle": "Syllabus Roadmap",
-    "primaryViewSubtitle": "start → end"
+    "primaryViewSubtitle": "start → end",
+    "accordionMode": false
   },
-  "note": "DB syllabus roadmap for FAANG prep. Practice modules (m04-m13) map every SQL problem to the DBMS concept it drills; theory modules (m01-m03, m14-m20) cover schema design, transactions, indexing, and scaling concepts asked in DB/system-design rounds but have no LeetCode problems attached. Sources merged: the original 8-company scrape (dsa-seed-systemdesign-db-setaside.json, 64 database-sql problems) and the newer 20-company 24 May 2026 scrape (89 problems), with a small set of well-known supplemental problems (flagged individually) added to fill thin modules (CTE/Recursive, Pivoting, Window ties). Company lists are unioned across sources; 'recentCompanies' reflects the most current data available for that problem.",
+  "note": "This roadmap follows a practical, interview-focused SQL learning path. Theory modules build core database concepts, while practice modules contain curated LeetCode problems that reinforce those topics. Some theory modules intentionally have no linked coding problems because they focus on concepts commonly discussed during database and system design interviews.",
   "companyDataAsOf": "2026-05-24",
   "companyDataSource": "LeetCode company tags, snapshot 24 May 2026 (github.com/snehasishroy/leetcode-companywise-interview-questions); Database-tag confirmation from github.com/neenza/leetcode-problems and github.com/doocs/leetcode",
   "topics": [

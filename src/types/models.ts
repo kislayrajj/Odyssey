@@ -8,8 +8,10 @@ export interface Category {
   uiConfig?: {
     primaryViewTitle: string;
     primaryViewSubtitle: string;
+    accordionMode?: boolean; 
   };
 }
+
 export interface Topic {
   id: string;
   categoryId: string;
