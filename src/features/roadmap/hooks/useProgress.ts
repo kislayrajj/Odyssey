@@ -40,7 +40,7 @@ export function useToggleProgress(categoryId: string) {
       });
       return { previousProgress };
     },
-    onError: (err, variables, context) => {
+    onError: (_err, _variables, context) => {
       setSyncStatus('error');
       if (context?.previousProgress) {
         queryClient.setQueryData(['progress', user?.uid, categoryId], context.previousProgress);
