@@ -13,7 +13,7 @@ interface Props {
   onSave: (content: string) => Promise<void>;
 }
 
-export function ProblemDetails({ itemId, initialContent, onSave }: Props) {
+export function ProblemDetails({initialContent, onSave }: Props) {
   const user = useAuthStore((state) => state.user);
   const openModal = useAuthModalStore((state) => state.openModal);
   const setDirty = useEditorStore((state) => state.setDirty);

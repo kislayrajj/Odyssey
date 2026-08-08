@@ -38,7 +38,7 @@ export function useUpdateNote(categoryId: string) {
 
       return { previousNotes };
     },
-    onError: (err, variables, context) => {
+    onError: (_err, _variables, context) => {
       setSyncStatus('error');
       if (context?.previousNotes) {
         queryClient.setQueryData(['notes', user?.uid, categoryId], context.previousNotes);
