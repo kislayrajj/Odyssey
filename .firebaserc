@@ -1,5 +1,15 @@
 {
   "projects": {
     "default": "odyssey-dd11c"
-  }
+  },
+  "targets": {
+    "odyssey-dd11c": {
+      "hosting": {
+        "main": [
+          "theodyssey"
+        ]
+      }
+    }
+  },
+  "etags": {}
 }

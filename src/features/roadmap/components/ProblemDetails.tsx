@@ -13,7 +13,7 @@ interface Props {
   onSave: (content: string) => Promise<void>;
 }
 
-export function ProblemDetails({initialContent, onSave }: Props) {
+export function ProblemDetails({ itemId, initialContent, onSave }: Props) {
   const user = useAuthStore((state) => state.user);
   const openModal = useAuthModalStore((state) => state.openModal);
   const setDirty = useEditorStore((state) => state.setDirty);
@@ -27,7 +27,22 @@ export function ProblemDetails({initialContent, onSave }: Props) {
 
   const isDirty = content !== baseContent;
 
+  // ---> INSTRUMENTATION LOGS <---
+  useEffect(() => {
+    console.log(`[Auth Trace] ${itemId} - isDirty evaluated to:`, isDirty);
+    console.log(`[Auth Trace] ${itemId} - content:`, content === '' ? 'EMPTY_STRING' : 'HAS_CONTENT');
+    console.log(`[Auth Trace] ${itemId} - baseContent:`, baseContent === '' ? 'EMPTY_STRING' : 'HAS_CONTENT');
+  }, [isDirty, content, baseContent, itemId]);
+
   const handleSave = async () => {
+    console.log(`[Auth Trace] ${itemId} - handleSave EXECUTED. User is:`, user ? 'LOGGED_IN' : 'LOGGED_OUT');
+    
+    // Defensive Guard (We add this now to prevent the actual crash during testing)
+    if (!user) {
+      console.warn(`[Auth Trace] ${itemId} - handleSave aborted: No user.`);
+      return;
+    }
+
     setIsSaving(true);
     try {
       await onSave(content);
@@ -43,8 +58,12 @@ export function ProblemDetails({initialContent, onSave }: Props) {
   };
 
   useEffect(() => {
+    console.log(`[Auth Trace] ${itemId} - Registering with global store. isDirty:`, isDirty);
     setDirty(isDirty, handleSave, handleDiscard);
-    return () => setDirty(false);
+    return () => {
+      console.log(`[Auth Trace] ${itemId} - Unmounting. Clearing global store.`);
+      setDirty(false);
+    };
   }, [isDirty, content, setDirty]);
 
   useEffect(() => {

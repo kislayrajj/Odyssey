@@ -4,19 +4,37 @@ import type { Item } from '@/types/models';
 
 export function useRoadmapProcessor(items: Item[] | undefined) {
   const { searchQuery, difficultyFilter } = useRoadmapStore();
-  
-  // PERFORMANCE: Defer the search query. The input stays at 60fps, 
-  // while the heavy filtering happens in the background.
   const deferredQuery = useDeferredValue(searchQuery);
 
   return useMemo(() => {
-    if (!items) return { filteredItems: [], itemsByTopic: new Map(), itemsByCompany: new Map(), companyStats: [] };
+    if (!items) {
+      return { 
+        filteredItems: [], 
+        itemsByTopic: new Map(), 
+        itemsByCompany: new Map(), 
+        allCompanyStats: [],
+        filteredCompanyCounts: new Map() // <-- NEW
+      };
+    }
 
     const filteredItems: Item[] = [];
     const itemsByTopic = new Map<string, Item[]>();
     const itemsByCompany = new Map<string, Item[]>();
-    const companyCounts = new Map<string, number>();
+    
+    // 1. Compute stable company stats (Structure & Ordering)
+    const allCompanyCounts = new Map<string, number>();
+    for (const item of items) {
+      if (item.companies) {
+        for (const company of item.companies) {
+          allCompanyCounts.set(company, (allCompanyCounts.get(company) || 0) + 1);
+        }
+      }
+    }
+    const allCompanyStats = Array.from(allCompanyCounts.entries())
+      .map(([name, count]) => ({ name, count }))
+      .sort((a, b) => b.count - a.count || a.name.localeCompare(b.name));
 
+    // 2. Filter Items
     const query = deferredQuery.toLowerCase().trim();
 
     for (const item of items) {
@@ -39,15 +57,26 @@ export function useRoadmapProcessor(items: Item[] | undefined) {
         for (const company of item.companies) {
           if (!itemsByCompany.has(company)) itemsByCompany.set(company, []);
           itemsByCompany.get(company)!.push(item);
-          companyCounts.set(company, (companyCounts.get(company) || 0) + 1);
         }
       }
     }
 
-    const companyStats = Array.from(companyCounts.entries())
-      .map(([name, count]) => ({ name, count }))
-      .sort((a, b) => b.count - a.count || a.name.localeCompare(b.name));
+    // 3. Compute dynamic counts based ONLY on filtered items
+    const filteredCompanyCounts = new Map<string, number>();
+    for (const item of filteredItems) {
+      if (item.companies) {
+        for (const company of item.companies) {
+          filteredCompanyCounts.set(company, (filteredCompanyCounts.get(company) || 0) + 1);
+        }
+      }
+    }
 
-    return { filteredItems, itemsByTopic, itemsByCompany, companyStats };
+    return { 
+      filteredItems, 
+      itemsByTopic, 
+      itemsByCompany, 
+      allCompanyStats, 
+      filteredCompanyCounts // <-- NEW
+    };
   }, [items, deferredQuery, difficultyFilter]);
 }

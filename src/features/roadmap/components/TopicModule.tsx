@@ -2,8 +2,12 @@ import { ChevronRight } from 'lucide-react';
 import { clsx } from 'clsx';
 import { motion, AnimatePresence } from 'framer-motion';
 import { ProblemTable } from './ProblemTable';
+import { VirtualizedProblemList } from './VirtualizedProblemList'; // <-- Import
 import React from 'react';
 import type { Topic, Item } from '@/types/models';
+
+// Configurable threshold for performance tuning
+export const VIRTUALIZATION_THRESHOLD = 300;
 
 interface Props {
   topic: Topic;
@@ -12,17 +16,20 @@ interface Props {
   onToggle: () => void;
   completedIds: Set<string>;
   notesMap: Map<string, string>;
+  scrollRef: React.RefObject<HTMLDivElement | null>; // <-- NEW
   onToggleComplete: (itemId: string, isCompleted: boolean) => Promise<void>;
   onSaveNote: (itemId: string, content: string) => Promise<void>;
 }
 
 export const TopicModule = React.memo(function TopicModule({ 
-  topic, items, isOpen, onToggle, completedIds, notesMap, onToggleComplete, onSaveNote 
+  topic, items, isOpen, onToggle, completedIds, notesMap, scrollRef, onToggleComplete, onSaveNote 
 }: Props) {
   
   const completedCount = items.filter(item => completedIds.has(item.id)).length;
   const totalCount = items.length;
   const isAllCompleted = totalCount > 0 && completedCount === totalCount;
+  
+  const isMassiveList = totalCount >= VIRTUALIZATION_THRESHOLD;
 
   return (
     <div className="mb-3 overflow-hidden rounded-lg border border-line bg-bg-raised">
@@ -68,13 +75,26 @@ export const TopicModule = React.memo(function TopicModule({
                   ))}
                 </div>
               )}
-              <ProblemTable 
-                items={items} 
-                completedIds={completedIds} 
-                notesMap={notesMap} 
-                onToggleComplete={onToggleComplete} 
-                onSaveNote={onSaveNote} 
-              />
+              
+              {/* DYNAMIC VIRTUALIZATION */}
+              {isMassiveList ? (
+                <VirtualizedProblemList 
+                  items={items} 
+                  completedIds={completedIds} 
+                  notesMap={notesMap} 
+                  scrollRef={scrollRef}
+                  onToggleComplete={onToggleComplete} 
+                  onSaveNote={onSaveNote} 
+                />
+              ) : (
+                <ProblemTable 
+                  items={items} 
+                  completedIds={completedIds} 
+                  notesMap={notesMap} 
+                  onToggleComplete={onToggleComplete} 
+                  onSaveNote={onSaveNote} 
+                />
+              )}
             </div>
           </motion.div>
         )}

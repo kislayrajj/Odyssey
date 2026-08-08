@@ -1,4 +1,4 @@
-import React, { useState } from 'react';
+import React from 'react';
 import { DifficultyPill } from '@/components/ui/DifficultyPill';
 import { CheckCircle2, Circle, FileText, ChevronDown } from 'lucide-react';
 import { clsx } from 'clsx';
@@ -11,18 +11,21 @@ interface Props {
   item: Item;
   isCompleted: boolean;
   noteContent?: string;
+  isExpanded: boolean;
+  onToggleExpand: () => void;
   onToggleComplete: (itemId: string, isCompleted: boolean) => Promise<void>;
   onSaveNote: (itemId: string, content: string) => Promise<void>;
 }
 
-export const MobileProblemCard = React.memo(function MobileProblemCard({ item, isCompleted, noteContent, onToggleComplete, onSaveNote }: Props) {
-  const [isExpanded, setIsExpanded] = useState(false);
+export const MobileProblemCard = React.memo(function MobileProblemCard({ 
+  item, isCompleted, noteContent, isExpanded, onToggleExpand, onToggleComplete, onSaveNote 
+}: Props) {
   const requireAuth = useRequireAuth();
   const guard = useNavigationGuard();
   const hasNote = !!noteContent;
 
   const handleCardClick = () => {
-    guard(() => setIsExpanded(!isExpanded));
+    guard(onToggleExpand);
   };
 
   const MAX_MOBILE_COMPANIES = 2;
@@ -34,7 +37,7 @@ export const MobileProblemCard = React.memo(function MobileProblemCard({ item, i
       <div 
         onClick={handleCardClick}
         className={clsx(
-          "flex items-start gap-3 p-4 transition-colors active:bg-bg-inset",
+          "flex items-start gap-3 p-4 transition-colors active:bg-bg-inset cursor-pointer",
           isExpanded && "bg-bg-inset"
         )}
       >
@@ -94,8 +97,7 @@ export const MobileProblemCard = React.memo(function MobileProblemCard({ item, i
       </div>
 
       {isExpanded && (
-        <div className="border-t border-line-soft bg-bg-raised p-0">
-          {/* PUBLIC DOMAIN DATA (Always Visible) */}
+        <div className="border-t border-line-soft bg-bg-raised p-0 cursor-default" onClick={(e) => e.stopPropagation()}>
           {item.companies && item.companies.length > 0 && (
             <div className="flex overflow-x-auto px-4 pt-4 pb-1 gap-1.5 scrollbar-hide">
               {item.companies.map(c => (
@@ -105,8 +107,6 @@ export const MobileProblemCard = React.memo(function MobileProblemCard({ item, i
               ))}
             </div>
           )}
-          
-          {/* PERSONAL WORKSPACE (Auth Gated) */}
           <ProblemDetails 
             itemId={item.id} 
             initialContent={noteContent}
@@ -119,5 +119,6 @@ export const MobileProblemCard = React.memo(function MobileProblemCard({ item, i
 }, (prev, next) => {
   return prev.item.id === next.item.id &&
          prev.isCompleted === next.isCompleted &&
+         prev.isExpanded === next.isExpanded &&
          prev.noteContent === next.noteContent;
 });
